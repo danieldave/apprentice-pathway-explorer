@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Pathway Planner: career quiz &amp; personal learning plan | Apprentice Pathways Explorer</title>
+<meta name="description" content="Take a free career quiz to find the trades that suit you in Nigeria, then build a personal step-by-step learning plan from 1 month to 3 years.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apprentice Pathways Explorer">
+<meta property="og:title" content="Pathway Planner: career quiz &amp; personal learning plan | Apprentice Pathways Explorer">
+<meta property="og:description" content="Take a free career quiz to find the trades that suit you in Nigeria, then build a personal step-by-step learning plan from 1 month to 3 years.">
+<meta property="og:image" content="icons/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#154536">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=JetBrains+Mono:wght@500&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="planner" data-root="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="Apprentice Pathways Explorer home">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12l-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17.6 15L22 10.6 13.4 2 9 6.4z"/></svg></span>
+      <span>Apprentice Pathways<small>Explorer · Nigeria</small></span>
+    </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list"><li><a href="index.html">Home</a></li><li><a href="trades.html">Trades</a></li><li><a href="careers.html">Careers</a></li><li><a href="skills.html">Talents / Skills</a></li><li><a href="planner.html" aria-current="page">Pathway Planner</a></li><li><a href="opportunities.html">Opportunities</a></li><li><a href="dashboard.html">My Dashboard</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+  <section class="mat page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>Pathway Planner</span></p>
+      <h1>Plan your path</h1>
+      <p class="lead">Find the trades that suit you, then turn your choice into a dated plan with numbered steps you can tick off.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Planner tools">
+        <button type="button" class="tab" role="tab" id="tab-quiz" data-tab="quiz" aria-controls="panel-quiz" aria-selected="true">1. Pathway Finder quiz</button>
+        <button type="button" class="tab" role="tab" id="tab-plan" data-tab="plan" aria-controls="panel-plan" aria-selected="false" tabindex="-1">2. Learning plan builder</button>
+      </div>
+      <div id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz">
+        <div class="quiz panel" id="quiz-body"><p class="note">Loading the quiz…</p></div>
+        <div id="quiz-results" hidden></div>
+      </div>
+      <div id="panel-plan" role="tabpanel" aria-labelledby="tab-plan" hidden>
+        <form class="panel" id="plan-form" novalidate>
+          <h2>Build a learning plan</h2>
+          <div class="form-grid">
+            <div class="field full"><label for="p-trade">Trade or course</label><select id="p-trade"><option value="">Choose a trade or course</option></select><span class="hint" id="p-trade-hint"></span></div>
+            <div class="field"><label for="p-months">How long can you train?</label>
+              <select id="p-months"><option value="typical">The typical time for this trade</option><option value="1">1 month</option><option value="3">3 months</option><option value="6">6 months</option><option value="12">1 year</option><option value="24">2 years</option><option value="36">3 years</option></select></div>
+            <div class="field"><label for="p-hours">Hours of practice per training day</label>
+              <select id="p-hours"><option value="2">About 2 hours (part-time)</option><option value="4">About 4 hours</option><option value="6" selected>About 6 hours</option><option value="8">About 8 hours (full-time)</option></select></div>
+            <div class="field"><label for="p-start">Start date</label><input type="date" id="p-start"></div>
+          </div>
+          <p class="err" id="plan-err" role="alert"></p>
+          <div class="row-actions"><button type="submit" class="btn btn-dark">Create my plan</button><span class="note">Nothing is sent anywhere. Plans are saved on this device.</span></div>
+        </form>
+        <div id="plan-out" style="margin-top:24px" hidden></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="index.html"><span>Apprentice Pathways<small>Explorer · Nigeria</small></span></a>
+      <p>Free guides to 99 trades, careers and skills in Nigeria, with personal learning plans. Your profile and plans stay on your own device.</p>
+    </div>
+    <div>
+      <h2>Explore</h2>
+      <ul>
+        <li><a href="trades.html">Trades (50)</a></li>
+        <li><a href="careers.html">Careers (16)</a></li>
+        <li><a href="skills.html">Talents / Skills (33)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Plan</h2>
+      <ul>
+        <li><a href="planner.html">Pathway Finder</a></li>
+        <li><a href="planner.html#plan">Learning plan builder</a></li>
+        <li><a href="dashboard.html">My Dashboard</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Get started</h2>
+      <ul>
+        <li><a href="opportunities.html">Programmes &amp; trade tests</a></li>
+        <li><a href="opportunities.html#states">Help in your state</a></li>
+        <li><a href="opportunities.html#agreement">Apprenticeship checklist</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base"><div class="wrap">© <span id="year">2026</span> Apprentice Pathways Explorer. Training times are typical ranges; masters and centres vary. Check programme details on official websites before you apply. <br> Built and edited  by Iroko Murisheed, Obanla Abel, and Olatubosun Aishat .</div></div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

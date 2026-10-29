@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>My Dashboard | Apprentice Pathways Explorer</title>
+<meta name="description" content="Your saved trades, learning plans and progress. Stored privately on your own device.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apprentice Pathways Explorer">
+<meta property="og:title" content="My Dashboard | Apprentice Pathways Explorer">
+<meta property="og:description" content="Your saved trades, learning plans and progress. Stored privately on your own device.">
+<meta property="og:image" content="icons/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#154536">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=JetBrains+Mono:wght@500&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="dashboard" data-root="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="Apprentice Pathways Explorer home">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12l-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17.6 15L22 10.6 13.4 2 9 6.4z"/></svg></span>
+      <span>Apprentice Pathways<small>Explorer · Nigeria</small></span>
+    </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list"><li><a href="index.html">Home</a></li><li><a href="trades.html">Trades</a></li><li><a href="careers.html">Careers</a></li><li><a href="skills.html">Talents / Skills</a></li><li><a href="planner.html">Pathway Planner</a></li><li><a href="opportunities.html">Opportunities</a></li><li><a href="dashboard.html" aria-current="page">My Dashboard</a></li></ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+  <section class="mat page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a><span>/</span><span>My Dashboard</span></p>
+      <h1>My Dashboard</h1>
+      <p class="lead">Your profile, plans and progress. Everything is stored on this device only. No name, phone number or email needed.</p>
+    </div>
+  </section>
+  <section class="section" id="dash">
+    <div class="wrap dash-grid">
+      <div class="dash-side">
+        <div class="panel">
+          <div class="profile-top"><div class="avatar" id="pf-avatar">A</div><div><strong id="pf-name">Guest apprentice</strong><span class="profile-id" id="pf-id"></span></div></div>
+          <form id="profile-form" novalidate>
+            <div class="form-grid" style="grid-template-columns:minmax(0,1fr)">
+              <div class="field"><label for="pf-nick">Nickname <span class="note">(optional)</span></label><input id="pf-nick" type="text" maxlength="30" autocomplete="nickname" placeholder="Any name you like"><span class="err" id="pf-err"></span></div>
+              <div class="field"><span class="label">Avatar colour</span><div class="swatches" id="pf-swatches"></div></div>
+              <div class="field"><label for="pf-state">State <span class="note">(optional)</span></label><select id="pf-state"><option value="">Prefer not to say</option></select></div>
+              <div class="field"><label for="pf-goal">Main goal <span class="note">(optional)</span></label><select id="pf-goal"><option value="">Not sure yet</option><option value="business">Own my shop or business</option><option value="job">Get a paid job</option><option value="freelance">Freelance or remote work</option></select></div>
+              <div class="field"><span class="label">Interests <span class="note">(optional)</span></span><div class="chips" id="pf-ints"></div></div>
+            </div>
+            <div class="row-actions" style="margin-top:16px"><button type="submit" class="btn btn-dark">Save profile</button></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>Move to another device</h2>
+          <p class="note">Make a backup code, then paste it on your new phone or computer to restore your profile and plans.</p>
+          <div class="row-actions" style="margin-top:12px"><button type="button" class="btn btn-ghost" id="bk-make"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V4H3v13h5"/></svg> Copy backup code</button></div>
+          <label class="visually-hidden" for="bk-code">Your backup code</label><textarea class="select" id="bk-code" rows="3" readonly hidden style="width:100%;margin-top:10px;padding:10px"></textarea>
+          <div class="field" style="margin-top:14px"><label for="bk-input">Restore from a backup code</label><textarea id="bk-input" rows="3" placeholder="Paste your backup code here"></textarea><span class="err" id="bk-err" role="alert"></span></div>
+          <button type="button" class="btn btn-ghost" id="bk-restore">Restore</button>
+        </div>
+        <div class="panel">
+          <h2>Your data</h2>
+          <p class="note">Clear your profile, saved trades and plans from this device.</p>
+          <div class="confirm"><button type="button" class="btn btn-danger" id="clear-all"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg> Clear my data</button></div>
+          <div class="confirm" id="clear-confirm" hidden><span>Delete everything on this device?</span><button type="button" class="btn btn-danger btn-sm" id="clear-yes">Yes, delete</button><button type="button" class="btn btn-ghost btn-sm" id="clear-no">Cancel</button></div>
+        </div>
+      </div>
+      <div class="dash-main">
+        <div class="stats">
+          <div class="stat"><strong id="st-saved">0</strong><span>Saved trades</span></div>
+          <div class="stat"><strong id="st-plans">0</strong><span>Learning plans</span></div>
+          <div class="stat"><strong id="st-steps">0/0</strong><span>Steps done</span></div>
+        </div>
+        <div class="panel" id="plans"><div class="section-head" style="margin-bottom:12px"><h2 style="margin:0">My learning plans</h2><a class="btn btn-ghost btn-sm" href="planner.html#plan">New plan</a></div><div id="dash-plans" style="display:grid;gap:12px"></div></div>
+        <div class="panel"><h2>Saved trades</h2><div id="dash-saved"></div></div>
+        <div class="two-col">
+          <div class="panel"><h2>Pathway Finder</h2><div id="dash-quiz"></div></div>
+          <div class="panel"><h2>Recently viewed</h2><div id="dash-recent"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="index.html"><span>Apprentice Pathways<small>Explorer · Nigeria</small></span></a>
+      <p>Free guides to 99 trades, careers and skills in Nigeria, with personal learning plans. Your profile and plans stay on your own device.</p>
+    </div>
+    <div>
+      <h2>Explore</h2>
+      <ul>
+        <li><a href="trades.html">Trades (50)</a></li>
+        <li><a href="careers.html">Careers (16)</a></li>
+        <li><a href="skills.html">Talents / Skills (33)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Plan</h2>
+      <ul>
+        <li><a href="planner.html">Pathway Finder</a></li>
+        <li><a href="planner.html#plan">Learning plan builder</a></li>
+        <li><a href="dashboard.html">My Dashboard</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Get started</h2>
+      <ul>
+        <li><a href="opportunities.html">Programmes &amp; trade tests</a></li>
+        <li><a href="opportunities.html#states">Help in your state</a></li>
+        <li><a href="opportunities.html#agreement">Apprenticeship checklist</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base"><div class="wrap">© <span id="year">2026</span> Apprentice Pathways Explorer. Training times are typical ranges; masters and centres vary. Check programme details on official websites before you apply. <br> Built and edited  by Iroko Murisheed, Obanla Abel, and Olatubosun Aishat .</div></div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
