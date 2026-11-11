@@ -629,47 +629,71 @@
     show();
   }
 
-  /* ---------- Ask a trainer (AI coming soon) ---------- */
+  /* ---------- AI Trainer (Vercel function /api/ask, answers from our own trade data) ---------- */
+  var T = function (k) { return window.I18N ? I18N.t(k) : k; };
   function initAsk() {
     var fab = document.createElement('button');
     fab.type = 'button'; fab.className = 'ask-fab'; fab.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-controls', 'ask-panel');
-    fab.innerHTML = icon('chat') + '<span>Ask a trainer</span>';
-    fab.setAttribute('aria-label', 'Ask a trainer');
+    fab.innerHTML = icon('chat') + '<span data-i18n="ask.fab">' + esc(T('ask.fab')) + '</span>';
+    fab.setAttribute('data-i18n-label', 'ask.fab'); fab.setAttribute('aria-label', T('ask.fab'));
     var panel = document.createElement('section');
-    panel.id = 'ask-panel'; panel.className = 'ask-panel'; panel.hidden = true; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Ask a trainer');
+    panel.id = 'ask-panel'; panel.className = 'ask-panel'; panel.hidden = true; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-labelledby', 'ask-title');
     panel.innerHTML =
-      '<div class="ask-head"><div><strong>Ask a trainer</strong><span>Questions about trades, training and starting out</span></div><button type="button" class="icon-btn" id="ask-close" aria-label="Close">' + icon('close') + '</button></div>' +
-      '<div class="ask-log" id="ask-log" aria-live="polite"><p class="bubble bot">Hello! Ask anything about learning a trade in Nigeria: how to choose a master, what tools to buy, or how long training takes.</p></div>' +
-      '<div class="ask-suggest">' + ['How do I find a good master?', 'Which trade can I learn in 3 months?', 'How do I register for a trade test?'].map(function (q) { return '<button type="button">' + esc(q) + '</button>'; }).join('') + '</div>' +
-      '<form class="ask-form" id="ask-form"><label class="visually-hidden" for="ask-input">Your question</label><textarea id="ask-input" rows="1" maxlength="600" placeholder="Type your question"></textarea>' +
-      '<button type="submit" class="btn btn-primary" aria-label="Send">' + icon('send') + '</button></form>';
+      '<div class="ask-head"><div><strong id="ask-title" data-i18n="ask.title">' + esc(T('ask.title')) + '</strong><span data-i18n="ask.sub">' + esc(T('ask.sub')) + '</span></div><button type="button" class="icon-btn" id="ask-close" data-i18n-label="ask.close" aria-label="' + esc(T('ask.close')) + '">' + icon('close') + '</button></div>' +
+      '<div class="ask-log" id="ask-log" aria-live="polite"><p class="bubble bot" data-i18n="ask.hello">' + esc(T('ask.hello')) + '</p></div>' +
+      '<div class="ask-suggest">' + ['ask.s1', 'ask.s2', 'ask.s3'].map(function (k) { return '<button type="button" data-i18n="' + k + '">' + esc(T(k)) + '</button>'; }).join('') + '</div>' +
+      '<form class="ask-form" id="ask-form"><label class="visually-hidden" for="ask-input" data-i18n="ask.placeholder">' + esc(T('ask.placeholder')) + '</label><textarea id="ask-input" rows="1" maxlength="600" data-i18n-placeholder="ask.placeholder" placeholder="' + esc(T('ask.placeholder')) + '"></textarea>' +
+      '<button type="submit" class="btn btn-primary" data-i18n-label="ask.send" aria-label="' + esc(T('ask.send')) + '">' + icon('send') + '</button></form>' +
+      '<p class="ask-note" data-i18n="ask.note">' + esc(T('ask.note')) + '</p>';
     document.body.appendChild(panel);
     document.body.appendChild(fab);
-    var log = $('#ask-log'), input = $('#ask-input');
+    var log = $('#ask-log'), input = $('#ask-input'), form = $('#ask-form');
     function open(on) {
       panel.hidden = !on; fab.setAttribute('aria-expanded', String(on));
       if (on) input.focus(); else fab.focus();
     }
+    function submit() { if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable: true })); }
     fab.addEventListener('click', function () { open(panel.hidden); });
     $('#ask-close').addEventListener('click', function () { open(false); });
     panel.addEventListener('keydown', function (e) { if (e.key === 'Escape') open(false); });
-    $$('.ask-suggest button', panel).forEach(function (b) { b.addEventListener('click', function () { input.value = b.textContent; input.focus(); }); });
-    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#ask-form').requestSubmit ? $('#ask-form').requestSubmit() : $('#ask-form').dispatchEvent(new Event('submit', { cancelable: true })); } });
+    panel.addEventListener('click', function (e) {
+      var b = e.target.closest('.ask-suggest button, .ask-follow button');
+      if (b) { input.value = b.textContent; submit(); }
+    });
+    // "Ask the AI Trainer about this trade" button on trade pages
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-ask-trade]');
+      if (!b) return;
+      var t = (window.TRADES || []).filter(function (x) { return x.id === b.getAttribute('data-ask-trade'); })[0];
+      open(true);
+      if (t) { input.value = 'How do I start learning ' + t.title.toLowerCase() + ', and how do I choose a good master?'; input.focus(); }
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); } });
     function bubble(cls, text) { var p = document.createElement('p'); p.className = 'bubble ' + cls; p.textContent = text; log.appendChild(p); log.scrollTop = log.scrollHeight; return p; }
-    $('#ask-form').addEventListener('submit', function (e) {
+    function answerHTML(d) {
+      var root = document.body.getAttribute('data-root') || '';
+      var links = (d.trades || []).map(function (id) {
+        var t = (window.TRADES || []).filter(function (x) { return x.id === id; })[0];
+        return t ? '<a class="ask-chip" href="' + root + 'trade/' + t.id + '.html">' + esc(t.title) + ' →</a>' : '';
+      }).join('');
+      return '<div class="ask-answer">' + esc(d.answer).replace(/\n+/g, '<br>') + '</div>' +
+        (links ? '<div class="ask-links"><small>' + esc(T('ask.see')) + '</small>' + links + '</div>' : '') +
+        ((d.followups || []).length ? '<div class="ask-follow">' + d.followups.map(function (q) { return '<button type="button">' + esc(q) + '</button>'; }).join('') + '</div>' : '');
+    }
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       var q = input.value.trim();
       if (!q) { input.focus(); return; }
       bubble('me', q); input.value = '';
       var ai = CFG.ai || {};
       if (!ai.enabled || !ai.endpoint) { bubble('bot soon', ai.comingSoonText || 'Feature coming soon.'); return; }
-      if (navigator.onLine === false) { bubble('bot soon', 'You are offline. Connect to the internet to ask a trainer.'); return; }
-      var waiting = bubble('bot', 'Thinking…');
+      if (navigator.onLine === false) { bubble('bot soon', T('ask.offline')); return; }
+      var waiting = bubble('bot thinking', T('ask.thinking'));
       var p = getProfile();
-      fetch(ai.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, context: { page: PAGE, trade: document.body.getAttribute('data-trade') || '', state: p ? p.state : '', interests: p ? p.interests : [] } }) })
-        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-        .then(function (d) { waiting.textContent = d && d.answer ? d.answer : 'Sorry, no answer came back. Please try again.'; })
-        .catch(function () { waiting.className = 'bubble bot soon'; waiting.textContent = 'The trainer could not be reached just now. Please try again later.'; });
+      fetch(ai.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, lang: window.I18N ? I18N.lang : 'en', context: { page: PAGE, trade: document.body.getAttribute('data-trade') || '', state: p ? p.state : '' } }) })
+        .then(function (r) { return r.json().then(function (d) { if (!r.ok || !d.answer) throw new Error(d.error || 'HTTP ' + r.status); return d; }); })
+        .then(function (d) { waiting.className = 'bubble bot'; waiting.innerHTML = answerHTML(d); log.scrollTop = log.scrollHeight; })
+        .catch(function () { waiting.className = 'bubble bot soon'; waiting.textContent = T('ask.error'); });
     });
   }
 
@@ -687,6 +711,7 @@
     initDashboard();
     initStates();
     initAsk();
+    if (window.I18N) I18N.start();
     if (window.Scenes) Scenes.mountAll(document);
     syncSaveButtons();
   }

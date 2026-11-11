@@ -1,0 +1,131 @@
+# Apprentice Pathways Explorer
+
+> Apprentice Pathways Explorer is a free guide to 99 trades, careers and creative skills in Nigeria, built by students of the ByteBusters Coding Club, Yewa College, Ilaro (Odu'a Investment Foundation). For each pathway it gives the training time, skills, step-by-step path, certification and the first step to take, plus a career quiz, a personal learning-plan builder and an AI Trainer in 17 Nigerian languages.
+
+Key facts:
+- Most Nigerian artisans learn under a master (oga) and receive their "freedom" when ready; the Igba Boi system sets apprentices up in business after service.
+- Trade tests are graded III, II and I; NABTEB issues Modular Trade Certificates.
+- National programmes (checked October 2026): Skill-Up Artisans (SUPA) (Industrial Training Fund (ITF)); TVET Initiative (Federal Ministry of Education); 3 Million Technical Talent (3MTT) (Federal Ministry of Communications, Innovation & Digital Economy with NITDA); Vocational skills & open apprenticeship (National Directorate of Employment (NDE)); Trade Test (Grade III, II, I) (Federal Ministry of Labour and state examinations boards); Modular Trade Certificate (MTC) (NABTEB); Nigerian Skills Qualification (NSQ) (National Board for Technical Education (NBTE)). Government programmes never ask you to pay agents.
+- Agree an apprenticeship in writing (length, fee, hours, freedom terms) with a guardian present.
+
+## Tools
+- [Pathway Finder quiz and learning plan](https://apprentice-pathway-explorer.vercel.app/planner.html)
+- [Programmes, trade tests and help in every state](https://apprentice-pathway-explorer.vercel.app/opportunities.html)
+
+## Categories
+- [Building & Construction](https://apprentice-pathway-explorer.vercel.app/category/construction.html)
+- [Electrical & Energy](https://apprentice-pathway-explorer.vercel.app/category/electrical.html)
+- [Electronics & Devices](https://apprentice-pathway-explorer.vercel.app/category/electronics.html)
+- [Automotive & Transport](https://apprentice-pathway-explorer.vercel.app/category/auto.html)
+- [Metalwork & Fabrication](https://apprentice-pathway-explorer.vercel.app/category/metal.html)
+- [Woodwork & Furniture](https://apprentice-pathway-explorer.vercel.app/category/wood.html)
+- [Food & Hospitality](https://apprentice-pathway-explorer.vercel.app/category/food.html)
+- [Agriculture & Agro-processing](https://apprentice-pathway-explorer.vercel.app/category/agric.html)
+- [Fashion, Textiles & Leather](https://apprentice-pathway-explorer.vercel.app/category/fashion.html)
+- [Beauty & Personal Care](https://apprentice-pathway-explorer.vercel.app/category/beauty.html)
+- [Arts, Crafts & Heritage](https://apprentice-pathway-explorer.vercel.app/category/crafts.html)
+- [Creative Media & Design](https://apprentice-pathway-explorer.vercel.app/category/creative.html)
+- [ICT & Digital](https://apprentice-pathway-explorer.vercel.app/category/digital.html)
+- [Technical & Industrial](https://apprentice-pathway-explorer.vercel.app/category/technical.html)
+- [Business & Services](https://apprentice-pathway-explorer.vercel.app/category/business.html)
+
+## Pathways
+- [How to learn Bricklaying & Block Laying in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/bricklaying.html): 2–3 years; Build walls, fences, columns and foundations with blocks and mortar. Every house in Nigeria starts with a mason.
+- [How to learn Tiling & Floor Finishing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/tiling.html): 6–12 months; Lay floor and wall tiles in homes, offices and shops with straight lines, clean cuts and level surfaces.
+- [How to learn POP Ceiling & Screeding in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/pop.html): 6–12 months; Create smooth POP walls, decorative ceilings and cornices that give buildings a modern finish.
+- [How to learn Painting & Decoration in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/painting.html): 6–12 months; Prepare and paint walls, ceilings and gates, and apply decorative finishes like textured and screeded paint.
+- [How to learn Plumbing & Pipe Fitting in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/plumbing.html): 1–2 years; Install pipes, tanks, pumps, toilets and water heaters, and fix leaks in homes and new buildings.
+- [How to learn Iron Bending (Steel Fixing) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/iron-bending.html): 6–12 months; Cut, bend and tie reinforcement rods for columns, beams and slabs that hold buildings up.
+- [How to learn Aluminium & Glass Fabrication in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/aluminium.html): 1–2 years; Make and install aluminium windows, doors, shop fronts and glass partitions.
+- [How to learn Roofing & Site Carpentry in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/roofing.html): 1–2 years; Build roof trusses, fix long-span and stone-coated roofing sheets, and make formwork for concrete.
+- [How to learn Borehole Drilling & Water Systems in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/borehole.html): 1–2 years; Drill boreholes, install submersible pumps and set up water treatment for homes and communities.
+- [How to learn Heavy Equipment Operation in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/heavy-equipment.html): 6–12 months; Operate excavators, bulldozers and payloaders on road, mining and building projects.
+- [How to learn Interlocking Paving & Kerbs in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/paving.html): 3–6 months; Lay interlocking stones, kerbs and drains for compounds, estates and roads.
+- [How to learn Electrical Installation (House Wiring) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/electrical.html): 2–3 years; Wire homes, shops and offices, install fittings and distribution boards, and find faults safely.
+- [How to learn Solar PV & Inverter Installation in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/solar.html): 6–12 months; Design and install solar panels, inverters and batteries for homes and businesses that need steady power.
+- [How to learn Refrigeration & Air-Conditioning (RAC) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/rac.html): 1–2 years; Install and repair air conditioners, fridges, freezers and cold rooms.
+- [How to learn Generator Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/generator.html): 1–2 years; Service and repair petrol and diesel generators, from small home sets to large standby units.
+- [How to learn Electric Motor Rewinding in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/rewinding.html): 1–2 years; Rewind and repair electric motors, pumps, fans and transformers instead of throwing them away.
+- [How to learn CCTV & Security Systems in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cctv.html): 3–6 months; Install cameras, intercoms, electric fences and alarms for homes, estates and businesses.
+- [How to learn Satellite Dish & TV Installation in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/satellite.html): 1–3 months; Install and align satellite dishes, decoders and TV mounts for homes, hotels and shops.
+- [How to learn Phone Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/phone-repair.html): 6–12 months; Replace screens, batteries and charging ports, and fix software and board faults on phones and tablets.
+- [How to learn Computer Hardware Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/computer-repair.html): 6–12 months; Repair laptops and desktops, upgrade parts, install systems and recover data for homes, schools and offices.
+- [How to learn TV & Electronics Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/electronics-repair.html): 1–2 years; Repair TVs, sound systems, amplifiers and decoders, from power supply faults to board repairs.
+- [How to learn Home Appliance Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/appliance-repair.html): 6–12 months; Fix fans, blenders, irons, microwaves and washing machines that every household depends on.
+- [How to learn Auto Mechanic in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/auto-mechanic.html): 3–4 years; Diagnose and repair cars, from engines, gearboxes and brakes to computer-controlled systems.
+- [How to learn Auto Electrician in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/auto-electrician.html): 2–3 years; Fix vehicle wiring, batteries, starters, alternators, lights, AC and car electronics.
+- [How to learn Panel Beating & Spray Painting in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/panel-beating.html): 2–3 years; Repair dents and accident damage on vehicles, then spray and polish them to look new.
+- [How to learn Vulcanizing & Wheel Balancing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/vulcanizing.html): 3–6 months; Repair punctures, fit tyres and balance wheels. A fast trade to learn with daily cash income.
+- [How to learn Motorcycle & Keke Repair in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/motorcycle.html): 1–2 years; Service and repair motorcycles and tricycles that move people and goods across Nigeria.
+- [How to learn Heavy-Duty Truck Mechanic in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/truck-mechanic.html): 3–4 years; Repair trucks, trailers and buses: diesel engines, air brakes, gearboxes and hydraulics.
+- [How to learn Professional Driving in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/driving.html): 1–3 months; Drive for companies, families, logistics firms and ride-hailing apps safely and professionally.
+- [How to learn Welding & Fabrication in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/welding.html): 2–3 years; Build gates, burglar-proof bars, tanks, trailers and steel structures by cutting and joining metal.
+- [How to learn Blacksmithing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/blacksmith.html): 1–2 years; Forge farm tools, knives, hoes, cutlasses and metal parts by heating and hammering steel.
+- [How to learn Machining (Lathe & Milling) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/machining.html): 2–3 years; Make and repair precise machine parts like shafts, bushings and gears on lathe and milling machines.
+- [How to learn Furniture Making & Cabinetry in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/furniture.html): 2–3 years; Make beds, wardrobes, kitchen cabinets, doors and office furniture that last for years.
+- [How to learn Upholstery in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/upholstery.html): 1–2 years; Make and re-cover sofas, chairs, headboards and car seats with foam, fabric and leather.
+- [How to learn Catering & Event Cooking in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/catering.html): 6–12 months; Cook Nigerian and continental dishes for parties, offices and events, in large quantities and on time.
+- [How to learn Baking & Confectionery in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/baking.html): 3–6 months; Bake bread, cakes, meat pies, doughnuts and pastries for homes, shops and events.
+- [How to learn Cake Making & Decoration in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cake-design.html): 2–4 months; Design and decorate birthday, wedding and celebration cakes with buttercream and fondant.
+- [How to learn Small Chops & Pastry in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/small-chops.html): 1–2 months; Make puff-puff, samosa, spring rolls, chin-chin and party packs for events and offices.
+- [How to learn Zobo, Juice & Yoghurt Production in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/drinks.html): 1–3 months; Produce zobo, fresh juices, kunu and yoghurt in clean, branded bottles for homes, schools and events.
+- [How to learn Butchery & Meat Processing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/butchery.html): 6–12 months; Cut, clean and package meat and poultry hygienically for markets, restaurants and supermarkets.
+- [How to learn Hotel & Hospitality Services in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/hospitality.html): 3–6 months; Work front desk, housekeeping, restaurant service and events in hotels, lounges and resorts.
+- [How to learn Poultry Farming in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/poultry.html): 3–6 months; Raise broilers and layers for meat and eggs, from day-old chicks to market.
+- [How to learn Fish Farming (Aquaculture) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/fish-farming.html): 3–6 months; Raise catfish and tilapia in ponds and tanks for markets, restaurants and processors.
+- [How to learn Vegetable & Greenhouse Farming in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/vegetables.html): 3–6 months; Grow tomatoes, peppers, cucumbers and leafy vegetables in open fields and greenhouses all year round.
+- [How to learn Goat, Sheep & Pig Rearing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/livestock.html): 3–6 months; Raise goats, sheep, pigs or rabbits for meat and breeding, with healthy housing and feeding.
+- [How to learn Snail Farming in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/snail-farming.html): 1–3 months; Raise giant African land snails in pens for meat and sale, with low start-up costs.
+- [How to learn Beekeeping in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/beekeeping.html): 3–6 months; Keep bees for honey and beeswax, and help farms with pollination.
+- [How to learn Cassava & Grain Processing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cassava.html): 1–3 months; Process cassava into garri, fufu and flour, and mill grains for food businesses and markets.
+- [How to learn Palm Oil Processing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/palm-oil.html): 1–3 months; Process palm fruit into clean red oil and palm kernel products for homes and industry.
+- [How to learn Tractor Operation & Farm Mechanisation in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/tractor.html): 6–12 months; Operate and maintain tractors and farm machines for ploughing, planting and harvesting services.
+- [How to learn Tailoring (Native & Suits) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/tailoring.html): 2–3 years; Sew agbada, kaftan, senator, buba and sokoto, and suits that fit perfectly.
+- [How to learn Fashion Design & Dressmaking in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/fashion-design.html): 2–3 years; Design and make dresses, aso-ebi styles and ready-to-wear collections with your own label.
+- [How to learn Adire & Tie-Dye in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/adire.html): 2–6 months; Create traditional and modern dyed fabrics using tie, stitch and wax-resist methods.
+- [How to learn Aso-Oke Weaving in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/aso-oke.html): 1–2 years; Weave aso-oke on traditional and broad looms for weddings, chieftaincy and festive wear.
+- [How to learn Shoemaking & Leatherwork in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/shoemaking.html): 1–2 years; Make shoes, sandals, belts and leather goods by hand and with machines.
+- [How to learn Bag Making in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/bag-making.html): 3–6 months; Design and sew handbags, school bags, totes and purses from leather, fabric and Ankara.
+- [How to learn Embroidery & Monogramming in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/embroidery.html): 3–6 months; Add machine and hand embroidery to kaftans, uniforms, caps and corporate wear.
+- [How to learn Laundry & Dry Cleaning in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/laundry.html): 1–3 months; Wash, dry-clean, iron and deliver clothes for busy homes, students and hotels.
+- [How to learn Hairdressing & Braiding in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/hairdressing.html): 1–2 years; Braid, weave, relax, treat and style hair for everyday clients, brides and events.
+- [How to learn Barbing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/barbing.html): 3–12 months; Cut, fade, line up and groom hair and beards with clean, modern styles.
+- [How to learn Makeup Artistry in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/makeup.html): 3–6 months; Do bridal, event and photo-shoot makeup that suits every skin tone and lasts all day.
+- [How to learn Gele & Head-tie Styling in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/gele.html): 1–2 months; Tie stunning gele and head-ties for weddings, owambe parties and photo shoots, and make auto-gele.
+- [How to learn Nail Technology in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/nails.html): 1–3 months; Do manicures, pedicures, acrylics, gel polish and nail art in salons or as a mobile service.
+- [How to learn Wig Making & Revamping in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/wig-making.html): 1–3 months; Make, customise and revamp wigs, and install frontals and closures for clients.
+- [How to learn Soap, Cream & Cosmetics Production in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cosmetics.html): 1–3 months; Make liquid soap, bar soap, body creams, shea butter blends and hair products safely.
+- [How to learn Spa & Massage Therapy in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/spa.html): 3–6 months; Offer massages, facials and body treatments in spas, hotels and gyms.
+- [How to learn Pottery & Ceramics in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/pottery.html): 1–2 years; Shape clay into pots, vases and decor on the wheel or by hand, then fire and glaze them.
+- [How to learn Wood Carving & Sculpture in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/wood-carving.html): 2–3 years; Carve masks, figures, doors, panels and decor from wood for homes, hotels and collectors.
+- [How to learn Bronze & Brass Casting in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/bronze-casting.html): 2–4 years; Cast sculptures, plaques and decor in bronze and brass using the lost-wax method.
+- [How to learn Cane & Rattan Weaving in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cane-weaving.html): 6–12 months; Weave baskets, chairs, lampshades and furniture from cane, rattan and raffia.
+- [How to learn Calabash Carving & Decoration in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/calabash.html): 3–6 months; Carve and decorate calabashes into bowls, instruments, lamps and souvenirs.
+- [How to learn Goldsmithing & Jewellery in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/jewellery.html): 2–3 years; Make and repair rings, chains and earrings in gold, silver and brass.
+- [How to learn Bead Making & Bead Jewellery in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/beads.html): 1–3 months; Make bead necklaces, bracelets, bags and bridal sets for weddings and fashion.
+- [How to learn Graphic Design in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/graphic-design.html): 6–12 months; Design logos, flyers, social posts and packaging that make brands look professional.
+- [How to learn Photography in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/photography.html): 6–12 months; Capture weddings, events, products and portraits, and edit them into photos people pay for.
+- [How to learn Videography & Video Editing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/videography.html): 6–12 months; Shoot and edit music videos, adverts, events and YouTube content.
+- [How to learn Music Production & Sound Engineering in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/music-production.html): 1–2 years; Make beats, record artists, and mix and master songs in a studio.
+- [How to learn DJing & Event Sound in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/dj.html): 3–6 months; Play music and run sound for parties, weddings, clubs and radio.
+- [How to learn Content Creation in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/content-creation.html): 3–6 months; Plan, film and post content that grows audiences for yourself or brands.
+- [How to learn Animation & Motion Graphics in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/animation.html): 1–2 years; Create 2D and 3D animations, explainer videos and motion graphics for brands and films.
+- [How to learn Fine Art & Portrait Painting in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/fine-art.html): 1–3 years; Paint and draw portraits, murals and artworks for clients, galleries and buildings.
+- [How to learn Event Decoration & Planning in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/event-decor.html): 3–6 months; Decorate and plan weddings, birthdays and corporate events with balloons, flowers, drapes and lighting.
+- [How to learn Interior Decoration in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/interior-decor.html): 6–12 months; Style homes, offices and shops with colour, furniture, lighting and curtains.
+- [How to learn Printing & Branding in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/printing.html): 6–12 months; Print T-shirts, banners, stickers, mugs and signs with screen, heat-press and large-format printing.
+- [How to learn Software Development in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/software-dev.html): 9 months – 1.5 years; Build websites, mobile apps and business tools. Learn by shipping real projects under a senior developer.
+- [How to learn Web Design & WordPress in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/web-design.html): 3–6 months; Design and launch websites for small businesses, churches, schools and NGOs.
+- [How to learn Data Analysis in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/data-analysis.html): 6–9 months; Turn sales records, surveys and spreadsheets into clear answers that help businesses decide.
+- [How to learn Cybersecurity in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/cybersecurity.html): 1–1.5 years; Protect people and businesses from scams, hacking and data theft by finding weak spots first.
+- [How to learn IT Support & Networking in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/it-support.html): 9–12 months; Set up and support computers, printers, Wi-Fi and office networks for schools, offices and shops.
+- [How to learn Digital Marketing in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/digital-marketing.html): 3–6 months; Help businesses find customers online through social media, ads, email and good writing.
+- [How to learn UI/UX Design in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/ui-ux.html): 6–9 months; Design apps and websites that are easy and pleasant to use, from research to clickable prototypes.
+- [How to learn Draughtsmanship & CAD in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/draughtsmanship.html): 1–2 years; Draw building plans and engineering drawings by hand and with AutoCAD for architects and engineers.
+- [How to learn Land Survey Assistant in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/survey-assistant.html): 1–2 years; Assist surveyors with measurements, beacons and site plans on land and construction projects.
+- [How to learn Laboratory & Food Quality Control in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/lab-quality.html): 6–12 months; Test and inspect food, water and products in factories and labs so they are safe and consistent.
+- [How to learn Process Plant Operator (Oil & Gas) in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/process-operator.html): 2–3 years; Operate and monitor pumps, valves and processing units in oil, gas and manufacturing plants.
+- [How to learn Telecom Mast Technician in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/telecom.html): 6–12 months; Install and maintain telecom masts, antennas, fibre and power systems that keep networks on.
+- [How to learn Bookkeeping & Small Business Accounts in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/bookkeeping.html): 3–6 months; Keep sales, expenses and stock records for shops and small businesses so they know if they are making profit.
+- [How to learn Logistics & Dispatch Operations in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/logistics.html): 1–3 months; Run deliveries for online shops, restaurants and companies: routes, riders, packages and payments.
+- [How to learn POS & Mobile Money Agent in Nigeria](https://apprentice-pathway-explorer.vercel.app/trade/pos-agent.html): 1–2 months; Run a POS and mobile money point for cash withdrawals, transfers and bill payments in your community.

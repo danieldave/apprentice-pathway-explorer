@@ -1,0 +1,11 @@
+{
+  "name": "apprentice-pathway-explorer",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Apprentice Pathways Explorer: 99 Nigerian trades with an AI Trainer, 17 languages and SEO/AEO/GEO guide pages.",
+  "scripts": {
+    "build:pages": "node tools/build.js",
+    "test": "node tools/test.js"
+  },
+  "engines": { "node": ">=18" }
+}

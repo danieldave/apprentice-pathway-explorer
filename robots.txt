@@ -1,5 +1,29 @@
+# Search engines AND AI search tools are welcome: the goal is to help every young Nigerian find a trade.
 User-agent: *
 Allow: /
 Disallow: /dashboard.html
+Disallow: /api/
 
-Sitemap: https://www.example.com/sitemap.xml
+User-agent: GPTBot
+Allow: /
+Disallow: /dashboard.html
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /dashboard.html
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /dashboard.html
+User-agent: PerplexityBot
+Allow: /
+Disallow: /dashboard.html
+User-agent: ClaudeBot
+Allow: /
+Disallow: /dashboard.html
+User-agent: Google-Extended
+Allow: /
+Disallow: /dashboard.html
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /dashboard.html
+
+Sitemap: https://apprentice-pathway-explorer.vercel.app/sitemap.xml

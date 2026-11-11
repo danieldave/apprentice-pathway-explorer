@@ -22,13 +22,18 @@ const args = process.argv.slice(2);
 const previewIdx = args.indexOf('--preview');
 const PREVIEW = previewIdx !== -1;
 const OUT = PREVIEW ? path.resolve(args[previewIdx + 1]) : ROOT_DIR;
-const SITE_URL = (process.env.SITE_URL || '').replace(/\/+$/, '');
+const SITE_JSON = path.join(__dirname, 'site.json');
+const SITE_URL = (process.env.SITE_URL || (fs.existsSync(SITE_JSON) ? JSON.parse(fs.readFileSync(SITE_JSON, 'utf8')).url : '')).replace(/\/+$/, '');
+const TODAY = new Date().toISOString().slice(0, 10);
 const SITE_NAME = 'Apprentice Pathways Explorer';
 const { esc, icon } = Rn;
+// lower-case for sentences, but keep acronyms like ICT, CCTV, POS, UI/UX, DJ
+const lc = (x) => String(x).split(' ').map((w) => /[A-Z]{2}/.test(w) ? w : w.toLowerCase()).join(' ');
+
 
 const NAV = [
-  ['index.html', 'Home', 'home'], ['trades.html', 'Trades', 'trades'], ['careers.html', 'Careers', 'careers'], ['skills.html', 'Talents / Skills', 'skills'],
-  ['planner.html', 'Pathway Planner', 'planner'], ['opportunities.html', 'Opportunities', 'opportunities'], ['dashboard.html', 'My Dashboard', 'dashboard']
+  ['index.html', 'Home', 'home', 'nav.home'], ['trades.html', 'Trades', 'trades', 'nav.trades'], ['careers.html', 'Careers', 'careers', 'nav.careers'], ['skills.html', 'Talents / Skills', 'skills', 'nav.skills'],
+  ['planner.html', 'Pathway Planner', 'planner', 'nav.planner'], ['opportunities.html', 'Opportunities', 'opportunities', 'nav.opps'], ['dashboard.html', 'My Dashboard', 'dashboard', 'nav.dash']
 ];
 
 function link(root, href) {
@@ -67,7 +72,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
 }
 
 function header(root, page) {
-  const items = NAV.map(([href, label, key]) => `<li><a href="${link(root, href)}"${key === page ? ' aria-current="page"' : ''}>${label}</a></li>`).join('');
+  const items = NAV.map(([href, label, key, i18n]) => `<li><a href="${link(root, href)}"${key === page ? ' aria-current="page"' : ''} data-i18n="${i18n}">${label}</a></li>`).join('');
   return `<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap header-row">
@@ -79,8 +84,11 @@ function header(root, page) {
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="nav-list">${items}</ul>
     </nav>
+    <label class="lang-pick" title="Language"><span class="visually-hidden" data-i18n="ui.language">Language</span>
+      <select id="langSelect" aria-label="Language"><option value="en">English</option></select><small id="langStatus" aria-live="polite"></small></label>
   </div>
 </header>
+<p class="ai-beta" id="aiBeta" hidden role="note"></p>
 `;
 }
 
@@ -93,15 +101,16 @@ function footer(root) {
       <p>Free guides to ${D.TRADES.length} trades, careers and skills in Nigeria, with personal learning plans. Your profile and plans stay on your own device.</p>
     </div>
     <div>
-      <h2>Explore</h2>
+      <h2 data-i18n="foot.explore">Explore</h2>
       <ul>
         <li><a href="${root}trades.html">Trades (${g('trades')})</a></li>
         <li><a href="${root}careers.html">Careers (${g('careers')})</a></li>
         <li><a href="${root}skills.html">Talents / Skills (${g('skills')})</a></li>
+        <li><a href="${root}category/">All ${Object.keys(D.CATEGORIES).length} categories</a></li>
       </ul>
     </div>
     <div>
-      <h2>Plan</h2>
+      <h2 data-i18n="foot.plan">Plan</h2>
       <ul>
         <li><a href="${root}planner.html">Pathway Finder</a></li>
         <li><a href="${root}planner.html#plan">Learning plan builder</a></li>
@@ -109,7 +118,7 @@ function footer(root) {
       </ul>
     </div>
     <div>
-      <h2>Get started</h2>
+      <h2 data-i18n="foot.start">Get started</h2>
       <ul>
         <li><a href="${root}opportunities.html">Programmes &amp; trade tests</a></li>
         <li><a href="${root}opportunities.html#states">Help in your state</a></li>
@@ -128,6 +137,7 @@ function scripts(root, page, extra) {
 <script src="${root}js/render.js"></script>
 <script src="${root}js/scenes.js"></script>
 <script src="${root}js/config.js"></script>
+<script src="${root}js/i18n.js"></script>
 <script src="${root}js/app.js"></script>
 ${extra || ''}</body>
 </html>
@@ -163,18 +173,18 @@ written.push(page({
   <section class="mat hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow">Learn it · Master it · Earn your freedom</p>
-        <h1>Find your trade. <em>Plan</em> your path.</h1>
-        <p class="lead">Explore ${D.TRADES.length} trades, careers and creative skills across Nigeria. See how long training takes, the skills you will learn, and the very first step to take, then get a learning plan made for you.</p>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Learn it · Master it · Earn your freedom</p>
+        <h1 data-i18n-html="hero.title">Find your trade. <em>Plan</em> your path.</h1>
+        <p class="lead" data-i18n="hero.lead">Explore ${D.TRADES.length} trades, careers and creative skills across Nigeria. See how long training takes, the skills you will learn, and the very first step to take, then get a learning plan made for you.</p>
         <div class="search">
           <label class="search-field" for="site-search">${icon('search')}<span class="visually-hidden">Search trades</span>
-            <input id="site-search" type="search" placeholder="Search: tailoring, solar, welding, baking…" autocomplete="off" aria-controls="site-search-results" aria-expanded="false">
+            <input id="site-search" type="search" placeholder="Search: tailoring, solar, welding, baking…" data-i18n-placeholder="hero.search" autocomplete="off" aria-controls="site-search-results" aria-expanded="false">
           </label>
           <ul class="search-results" id="site-search-results" hidden></ul>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="planner.html">Take the Pathway Finder ${icon('arrow')}</a>
-          <a class="btn btn-ghost" href="planner.html#plan">Build a learning plan</a>
+          <a class="btn btn-primary" href="planner.html"><span data-i18n="hero.finder">Take the Pathway Finder</span> ${icon('arrow')}</a>
+          <a class="btn btn-ghost" href="planner.html#plan" data-i18n="hero.plan">Build a learning plan</a>
         </div>
         <p class="hero-stats"><span><strong>${D.TRADES.length}</strong> pathways</span><span><strong>${Object.keys(D.CATEGORIES).length}</strong> categories</span><span><strong>36</strong> states + FCT</span><span><strong>Free</strong>, no sign-up</span></p>
       </div>
@@ -211,7 +221,7 @@ written.push(page({
     <div class="wrap">
       <div class="section-head"><div><p class="eyebrow">Browse</p><h2 id="cats-title">All ${Object.keys(D.CATEGORIES).length} categories</h2></div></div>
       <div class="cat-grid">
-        ${Object.keys(D.CATEGORIES).map((c) => `<a class="cat-link" href="${D.GROUPS[D.CATEGORIES[c].group].page}#cat-${c}"><span>${esc(D.CATEGORIES[c].label)}</span><span class="count">${D.TRADES.filter((t) => t.cat === c).length}</span></a>`).join('\n        ')}
+        ${Object.keys(D.CATEGORIES).map((c) => `<a class="cat-link" href="category/${c}.html"><span>${esc(D.CATEGORIES[c].label)}</span><span class="count">${D.TRADES.filter((t) => t.cat === c).length}</span></a>`).join('\n        ')}
       </div>
     </div>
   </section>
@@ -267,7 +277,7 @@ for (const g of ['trades', 'careers', 'skills']) {
   written.push(page({
     file: D.GROUPS[g].page, page: g,
     title: `${label} in Nigeria: ${list.length} apprenticeship pathways | ${SITE_NAME}`,
-    description: `${D.GROUPS[g].blurb} Compare ${list.length} ${label.toLowerCase()} pathways in Nigeria by training time, start-up cost and skills.`,
+    description: `${D.GROUPS[g].blurb} Compare ${list.length} ${lc(label)} pathways in Nigeria by training time, start-up cost and skills.`,
     jsonld: { '@context': 'https://schema.org', '@type': 'ItemList', name: `${label} pathways in Nigeria`, numberOfItems: list.length, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title, url: SITE_URL ? `${SITE_URL}/trade/${t.id}.html` : `trade/${t.id}.html` })) },
     main: `
   <section class="mat page-head">
@@ -281,7 +291,7 @@ for (const g of ['trades', 'careers', 'skills']) {
     <div class="wrap">
       <div class="toolbar">
         <div class="toolbar-row">
-          <label class="search-field" for="dir-search">${icon('search')}<span class="visually-hidden">Search ${label}</span><input id="dir-search" type="search" placeholder="Search ${label.toLowerCase()}" autocomplete="off"></label>
+          <label class="search-field" for="dir-search">${icon('search')}<span class="visually-hidden">Search ${label}</span><input id="dir-search" type="search" placeholder="Search ${lc(label)}" autocomplete="off"></label>
           <label class="visually-hidden" for="f-length">Training length</label>
           <select class="select" id="f-length"><option value="0">Any training length</option><option value="1">Start in 1 month</option><option value="3">Up to 3 months</option><option value="12">Up to 1 year</option><option value="24">Up to 2 years</option></select>
           <label class="visually-hidden" for="f-cost">Start-up cost</label>
@@ -302,6 +312,26 @@ for (const g of ['trades', 'careers', 'skills']) {
   }));
 }
 
+/* ---------------- AEO helpers: quick answers and FAQs ---------------- */
+function whereToLearn(t) {
+  const prog = t.cat === 'digital' || t.cat === 'creative' ? '3MTT (for selected tech skills)' : 'the ITF Skill-Up Artisans (SUPA) programme and the federal TVET initiative';
+  return `Most people learn under a master (oga) in a workshop, at a state or church/mosque skills acquisition centre, or at a government technical college.${t.hubs ? ' Known clusters: ' + t.hubs + '.' : ''} National programmes such as ${prog} also train and certify people; confirm details on the official .gov.ng website.`;
+}
+function tradeFAQ(t) {
+  const cat = D.CATEGORIES[t.cat], yrs = D.durationLabel(t.months), name = lc(t.title);
+  return [
+    [`How long does it take to learn ${name} in Nigeria?`, `Training usually takes ${yrs}. The path: ${t.path.join(', then ')}.`],
+    [`How do I start learning ${name}?`, t.first],
+    [`What skills will I learn in ${name}?`, `${t.skills.join(', ')}.`],
+    [`What certificate do I need for ${name}?`, cat.route],
+    [`How much does it cost to start ${name}?`, `${D.costLabel(t.cost)} compared with other trades. We do not list exact prices because they change often: ask two or three masters, compare, and agree the training fee in writing before you start.`],
+    [`Where can I learn ${name} in Nigeria?`, whereToLearn(t)]
+  ];
+}
+const faqHTML = (faq) => `<div class="faq">${faq.map(([q, a]) => `<details class="faq-item"><summary><h3>${esc(q)}</h3></summary><p>${esc(a)}</p></details>`).join('')}</div>`;
+const faqLD = (faq) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
+const PUBLISHER = { '@type': 'EducationalOrganization', name: 'ByteBusters Coding Club, Yewa College, Ilaro', parentOrganization: { '@type': 'Organization', name: "Odu'a Investment Foundation" } };
+
 /* ---------------- TRADE PAGES ---------------- */
 for (const t of D.TRADES) {
   const cat = D.CATEGORIES[t.cat], grp = D.GROUPS[cat.group];
@@ -309,9 +339,11 @@ for (const t of D.TRADES) {
   const yrs = D.durationLabel(t.months);
   written.push(page({
     file: `trade/${t.id}.html`, page: cat.group, root: '../', bodyAttrs: ` data-trade="${t.id}"`,
-    title: `${t.title}: training path, skills & years required in Nigeria | ${SITE_NAME}`,
-    description: `How to become a ${t.title.toLowerCase()} professional in Nigeria. ${t.summary} Typical training: ${yrs}.`,
+    title: (`How to learn ${t.title} in Nigeria: years, skills & first step | Apprentice Pathways`).length <= 90 ? `How to learn ${t.title} in Nigeria: years, skills & first step | Apprentice Pathways` : `How to learn ${t.title} in Nigeria | Apprentice Pathways`,
+    description: (`Learn ${lc(t.title)} in Nigeria in ${yrs}. ${t.summary}`).length <= 160 ? `Learn ${lc(t.title)} in Nigeria in ${yrs}. ${t.summary}` : `Learn ${lc(t.title)} in Nigeria in ${yrs}: skills, steps, certificates and your first step.`,
     jsonld: [
+      faqLD(tradeFAQ(t)),
+      { '@context': 'https://schema.org', '@type': 'Article', headline: `How to learn ${t.title} in Nigeria`, inLanguage: 'en-NG', dateModified: TODAY, author: PUBLISHER, publisher: PUBLISHER, ...(SITE_URL ? { mainEntityOfPage: `${SITE_URL}/trade/${t.id}.html`, image: `${SITE_URL}/icons/og-image.png` } : {}) },
       { '@context': 'https://schema.org', '@type': 'Occupation', name: t.title, description: t.summary, skills: t.skills.join(', '), occupationalCategory: cat.label, occupationLocation: { '@type': 'Country', name: 'Nigeria' }, educationRequirements: `Apprenticeship or vocational training, typically ${yrs}. ${cat.route}` },
       { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL ? SITE_URL + '/' : undefined }, { '@type': 'ListItem', position: 2, name: grp.label, item: SITE_URL ? `${SITE_URL}/${grp.page}` : undefined }, { '@type': 'ListItem', position: 3, name: t.title }] }
     ],
@@ -321,6 +353,7 @@ for (const t of D.TRADES) {
       <p class="crumbs"><a href="${link('../', 'index.html')}">Home</a><span>/</span><a href="../${grp.page}">${grp.label}</a><span>/</span><a href="../${grp.page}#cat-${t.cat}">${esc(cat.label)}</a></p>
       <h1>${esc(t.title)}</h1>
       <p class="lead">${esc(t.summary)}</p>
+      <p class="answer-box"><b data-i18n="trade.quick">Quick answer</b>: to learn <strong>${esc(lc(t.title))}</strong> in Nigeria, train for about <strong>${esc(yrs)}</strong> under a master or at a skills centre. ${esc(t.first)}</p>
     </div>
   </section>
   <section class="section">
@@ -328,20 +361,22 @@ for (const t of D.TRADES) {
       <figure class="trade-figure" style="margin:0">
         <div class="media">${Scenes.render(t)}</div>
         <div class="facts">
-          <div class="fact"><span>${icon('clock')} Years required</span><strong>${esc(yrs)}</strong></div>
+          <div class="fact"><span>${icon('clock')} <span data-i18n="trade.years">Years required</span></span><strong>${esc(yrs)}</strong></div>
           <div class="fact"><span>Category</span><strong>${esc(cat.label)}</strong></div>
           <div class="fact"><span>${icon('wallet')} Start-up cost</span><strong>${Rn.COST_SHORT[t.cost]}</strong></div>
           <div class="fact"><span>Work setting</span><strong>${{ indoor: 'Indoors', outdoor: 'Outdoors / on site', mixed: 'Indoors and on site' }[t.setting]}</strong></div>
         </div>
       </figure>
       <div class="trade-body">
-        <div class="first-step"><p class="eyebrow">${icon('flag')} Your first step</p><p>${esc(t.first)}</p></div>
-        <div><h2>Summary of the work</h2><p class="summary">${esc(t.summary)}</p>${t.hubs ? `<p class="note" style="margin-top:8px">${icon('map')} Known clusters: ${esc(t.hubs)}.</p>` : ''}</div>
-        <div><h2>Skills training</h2><ul class="skill-list">${t.skills.map((s) => `<li>${icon('check')}<span>${esc(s)}</span></li>`).join('')}</ul></div>
-        <div><h2>Training path, step by step</h2>${Rn.pathHTML(t)}</div>
-        <div><h2>${icon('award')} Certification</h2><p>${esc(cat.route)}</p></div>
+        <div class="first-step"><p class="eyebrow">${icon('flag')} <span data-i18n="trade.first">Your first step</span></p><p>${esc(t.first)}</p></div>
+        <div><h2 data-i18n="trade.summary">Summary of the work</h2><p class="summary">${esc(t.summary)}</p>${t.hubs ? `<p class="note" style="margin-top:8px">${icon('map')} Known clusters: ${esc(t.hubs)}.</p>` : ''}</div>
+        <div><h2 data-i18n="trade.skills">Skills training</h2><ul class="skill-list">${t.skills.map((s) => `<li>${icon('check')}<span>${esc(s)}</span></li>`).join('')}</ul></div>
+        <div><h2 data-i18n="trade.path">Training path, step by step</h2>${Rn.pathHTML(t)}</div>
+        <div><h2>${icon('award')} <span data-i18n="trade.cert">Certification</span></h2><p>${esc(cat.route)}</p></div>
+        <div><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(tradeFAQ(t))}</div>
         <div class="row-actions">
-          <a class="btn btn-primary" href="../planner.html#t-${t.id}">Build my learning plan ${icon('arrow')}</a>
+          <a class="btn btn-primary" href="../planner.html#t-${t.id}"><span data-i18n="trade.buildPlan">Build my learning plan</span> ${icon('arrow')}</a>
+          <button type="button" class="btn btn-ghost" data-ask-trade="${t.id}">${icon('chat')} <span data-i18n="trade.ask">Ask the AI Trainer about this trade</span></button>
           <button type="button" class="btn btn-ghost" data-save="${t.id}">${icon('bookmark')} Save this trade</button>
           <button type="button" class="btn btn-ghost" id="share-link">${icon('copy')} Copy link</button>
         </div>
@@ -357,6 +392,55 @@ for (const t of D.TRADES) {
   </section>` : ''}`
   }));
 }
+
+/* ---------------- CATEGORY PAGES (SEO + AEO) ---------------- */
+for (const c of Object.keys(D.CATEGORIES)) {
+  const cat = D.CATEGORIES[c], grp = D.GROUPS[cat.group];
+  const list = D.TRADES.filter((t) => t.cat === c).sort((a, b) => a.months[0] - b.months[0] || a.title.localeCompare(b.title));
+  if (!list.length) continue;
+  const shortest = list[0], cheapest = list.slice().sort((a, b) => a.cost - b.cost || a.months[0] - b.months[0])[0];
+  const minM = Math.min(...list.map((t) => t.months[0])), maxM = Math.max(...list.map((t) => t.months[1]));
+  const label = cat.label;
+  const faq = [
+    [`Which ${lc(label)} skill is quickest to learn?`, `${shortest.title}: about ${D.durationLabel(shortest.months)}.`],
+    [`Which ${lc(label)} skill is cheapest to start?`, `${cheapest.title} (${D.costLabel(cheapest.cost).toLowerCase()}).`],
+    [`How long does ${lc(label)} training take in Nigeria?`, `Between ${D.durationLabel([minM, minM])} and ${D.durationLabel([maxM, maxM])}, depending on the trade.`],
+    [`What certificates are there for ${lc(label)}?`, cat.route]
+  ];
+  written.push(page({
+    file: `category/${c}.html`, page: cat.group, root: '../',
+    title: `${label} skills in Nigeria: ${list.length} pathways compared | Apprentice Pathways`,
+    description: `Compare ${list.length} ${lc(label)} pathways in Nigeria by training time, start-up cost and certificates, from ${lc(shortest.title)} to ${lc(list[list.length - 1].title)}.`.slice(0, 160),
+    jsonld: [faqLD(faq), { '@context': 'https://schema.org', '@type': 'ItemList', name: `${label} pathways in Nigeria`, numberOfItems: list.length, itemListElement: list.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title, url: SITE_URL ? `${SITE_URL}/trade/${t.id}.html` : `../trade/${t.id}.html` })) }],
+    main: `
+  <section class="mat page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="${link('../', 'index.html')}">Home</a><span>/</span><a href="../category/">Categories</a><span>/</span><span>${esc(label)}</span></p>
+      <h1>${esc(label)}</h1>
+      <p class="answer-box"><b data-i18n="trade.quick">Quick answer</b>: there are <strong>${list.length}</strong> ${esc(lc(label))} pathways here. The quickest is <strong>${esc(shortest.title)}</strong> (${esc(D.durationLabel(shortest.months))}); the cheapest to start is <strong>${esc(cheapest.title)}</strong>. ${esc(cat.route)}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="card-grid">${list.map((t) => Rn.cardHTML(t, '../')).join('')}</div>
+      <div style="margin-top:32px;max-width:820px"><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(faq)}</div>
+      <p class="note" style="margin-top:20px">Part of <a href="../${grp.page}">${grp.label}</a>. Written by the ByteBusters Coding Club, Yewa College, Ilaro. Updated ${TODAY}.</p>
+    </div>
+  </section>`
+  }));
+}
+written.push(page({
+  file: 'category/index.html', page: 'trades', root: '../',
+  title: `All ${Object.keys(D.CATEGORIES).length} trade and skill categories in Nigeria | Apprentice Pathways`,
+  description: `Browse ${D.TRADES.length} apprenticeship pathways in Nigeria by category: building, electrical, auto, fashion, beauty, digital, food, agriculture and more.`,
+  main: `
+  <section class="mat page-head"><div class="wrap">
+    <p class="crumbs"><a href="${link('../', 'index.html')}">Home</a><span>/</span><span>Categories</span></p>
+    <h1>All categories</h1>
+    <p class="answer-box"><b data-i18n="trade.quick">Quick answer</b>: Nigeria has trades for every interest. Pick a category to compare its pathways by training time and start-up cost.</p>
+  </div></section>
+  <section class="section"><div class="wrap"><div class="cat-grid">${Object.keys(D.CATEGORIES).map((c) => `<a class="cat-link" href="${c}.html"><span>${esc(D.CATEGORIES[c].label)}</span><span class="count">${D.TRADES.filter((t) => t.cat === c).length}</span></a>`).join('')}</div></div></section>`
+}));
 
 /* ---------------- PLANNER ---------------- */
 written.push(page({
@@ -540,17 +624,46 @@ if (!PREVIEW) {
 /* ---------------- SEO files, manifest, service worker ---------------- */
 const base = SITE_URL || 'https://www.example.com';
 const indexable = written.filter((f) => !['dashboard.html', 'offline.html', '404.html'].includes(f));
-fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<!-- ${SITE_URL ? '' : 'Replace https://www.example.com with your real domain, or rebuild with SITE_URL=https://yourdomain node tools/build.js'} -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((f) => `  <url><loc>${base}/${f === 'index.html' ? '' : f}</loc><changefreq>monthly</changefreq><priority>${f === 'index.html' ? '1.0' : f.startsWith('trade/') ? '0.7' : '0.8'}</priority></url>`).join('\n')}\n</urlset>\n`);
-fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /dashboard.html\n\nSitemap: ${base}/sitemap.xml\n`);
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<!-- ${SITE_URL ? '' : 'Replace https://www.example.com with your real domain, or rebuild with SITE_URL=https://yourdomain node tools/build.js'} -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((f) => `  <url><loc>${base}/${f === 'index.html' ? '' : f}</loc><changefreq>monthly</changefreq><lastmod>${TODAY}</lastmod><priority>${f === 'index.html' ? '1.0' : f.startsWith('trade/') ? '0.7' : '0.8'}</priority></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(OUT, 'robots.txt'), `# Search engines AND AI search tools are welcome: the goal is to help every young Nigerian find a trade.
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /api/
+
+${['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'PerplexityBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended'].map((b) => `User-agent: ${b}\nAllow: /\nDisallow: /dashboard.html`).join('\n')}
+
+Sitemap: ${base}/sitemap.xml
+`);
+fs.writeFileSync(path.join(OUT, 'llms.txt'), `# ${SITE_NAME}
+
+> ${SITE_NAME} is a free guide to ${D.TRADES.length} trades, careers and creative skills in Nigeria, built by students of the ByteBusters Coding Club, Yewa College, Ilaro (Odu'a Investment Foundation). For each pathway it gives the training time, skills, step-by-step path, certification and the first step to take, plus a career quiz, a personal learning-plan builder and an AI Trainer in 17 Nigerian languages.
+
+Key facts:
+- Most Nigerian artisans learn under a master (oga) and receive their "freedom" when ready; the Igba Boi system sets apprentices up in business after service.
+- Trade tests are graded III, II and I; NABTEB issues Modular Trade Certificates.
+- National programmes (checked October 2026): ${D.OPPORTUNITIES.map((o) => o.name + ' (' + o.by + ')').join('; ')}. Government programmes never ask you to pay agents.
+- Agree an apprenticeship in writing (length, fee, hours, freedom terms) with a guardian present.
+
+## Tools
+- [Pathway Finder quiz and learning plan](${base}/planner.html)
+- [Programmes, trade tests and help in every state](${base}/opportunities.html)
+
+## Categories
+${Object.keys(D.CATEGORIES).map((c) => `- [${D.CATEGORIES[c].label}](${base}/category/${c}.html)`).join('\n')}
+
+## Pathways
+${D.TRADES.map((t) => `- [How to learn ${t.title} in Nigeria](${base}/trade/${t.id}.html): ${D.durationLabel(t.months)}; ${t.summary}`).join('\n')}
+`);
 fs.writeFileSync(path.join(OUT, 'manifest.webmanifest'), JSON.stringify({
   name: SITE_NAME, short_name: 'Pathways', description: 'Trades, careers and apprenticeship pathways in Nigeria, with personal learning plans.',
   start_url: './index.html', scope: './', display: 'standalone', background_color: '#f2f5f1', theme_color: '#154536', lang: 'en-NG',
   icons: [{ src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }, { src: 'icons/icon.svg', sizes: 'any', type: 'image/svg+xml' }]
 }, null, 2));
 
-const assets = ['css/style.css', 'js/data.js', 'js/render.js', 'js/scenes.js', 'js/config.js', 'js/app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
+const assets = ['css/style.css', 'js/data.js', 'js/render.js', 'js/scenes.js', 'js/config.js', 'js/i18n.js', 'js/app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
 // Core pages are saved for offline use straight away; each trade page is saved the first time it is opened.
-const precache = ['./'].concat(written.filter((f) => f !== '404.html' && !f.startsWith('trade/')), assets);
+const precache = ['./'].concat(written.filter((f) => f !== '404.html' && !f.startsWith('trade/') && !f.startsWith('category/')), assets);
 const hash = crypto.createHash('sha1');
 for (const f of written.concat(assets)) { const p = path.join(fs.existsSync(path.join(OUT, f)) ? OUT : ROOT_DIR, f); if (fs.existsSync(p)) hash.update(fs.readFileSync(p)); }
 const version = hash.digest('hex').slice(0, 10);

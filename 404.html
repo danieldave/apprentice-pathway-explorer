@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Apprentice Pathways Explorer">
 <meta property="og:title" content="Page not found | Apprentice Pathways Explorer">
 <meta property="og:description" content="This page does not exist.">
-<meta property="og:image" content="/icons/og-image.png">
+<meta property="og:image" content="https://apprentice-pathway-explorer.vercel.app/icons/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#154536">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -32,10 +32,13 @@
     </a>
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <ul class="nav-list"><li><a href="/index.html">Home</a></li><li><a href="/trades.html">Trades</a></li><li><a href="/careers.html">Careers</a></li><li><a href="/skills.html">Talents / Skills</a></li><li><a href="/planner.html">Pathway Planner</a></li><li><a href="/opportunities.html">Opportunities</a></li><li><a href="/dashboard.html">My Dashboard</a></li></ul>
+      <ul class="nav-list"><li><a href="/index.html" data-i18n="nav.home">Home</a></li><li><a href="/trades.html" data-i18n="nav.trades">Trades</a></li><li><a href="/careers.html" data-i18n="nav.careers">Careers</a></li><li><a href="/skills.html" data-i18n="nav.skills">Talents / Skills</a></li><li><a href="/planner.html" data-i18n="nav.planner">Pathway Planner</a></li><li><a href="/opportunities.html" data-i18n="nav.opps">Opportunities</a></li><li><a href="/dashboard.html" data-i18n="nav.dash">My Dashboard</a></li></ul>
     </nav>
+    <label class="lang-pick" title="Language"><span class="visually-hidden" data-i18n="ui.language">Language</span>
+      <select id="langSelect" aria-label="Language"><option value="en">English</option></select><small id="langStatus" aria-live="polite"></small></label>
   </div>
 </header>
+<p class="ai-beta" id="aiBeta" hidden role="note"></p>
 <main id="main">
 <section class="section"><div class="wrap" style="max-width:640px"><h1 class="display" style="font-size:2.6rem">Page not found</h1><p class="lead" style="color:var(--muted)">The page you asked for is not here. It may have moved.</p><div class="hero-actions"><a class="btn btn-dark" href="/">Go to the home page</a><a class="btn btn-ghost" href="/trades.html">Browse trades</a></div></div></section>
 </main>
@@ -46,15 +49,16 @@
       <p>Free guides to 99 trades, careers and skills in Nigeria, with personal learning plans. Your profile and plans stay on your own device.</p>
     </div>
     <div>
-      <h2>Explore</h2>
+      <h2 data-i18n="foot.explore">Explore</h2>
       <ul>
         <li><a href="/trades.html">Trades (50)</a></li>
         <li><a href="/careers.html">Careers (16)</a></li>
         <li><a href="/skills.html">Talents / Skills (33)</a></li>
+        <li><a href="/category/">All 15 categories</a></li>
       </ul>
     </div>
     <div>
-      <h2>Plan</h2>
+      <h2 data-i18n="foot.plan">Plan</h2>
       <ul>
         <li><a href="/planner.html">Pathway Finder</a></li>
         <li><a href="/planner.html#plan">Learning plan builder</a></li>
@@ -62,7 +66,7 @@
       </ul>
     </div>
     <div>
-      <h2>Get started</h2>
+      <h2 data-i18n="foot.start">Get started</h2>
       <ul>
         <li><a href="/opportunities.html">Programmes &amp; trade tests</a></li>
         <li><a href="/opportunities.html#states">Help in your state</a></li>
@@ -70,12 +74,13 @@
       </ul>
     </div>
   </div>
-  <div class="footer-base"><div class="wrap">© <span id="year">2026</span> Apprentice Pathways Explorer. Training times are typical ranges; masters and centres vary. Check programme details on official websites before you apply. <br> Built and edited  by Iroko Murisheed, Obanla Abel, and Olatubosun Aishat .</div></div>
+  <div class="footer-base"><div class="wrap">© <span id="year">2026</span> Apprentice Pathways Explorer. Training times are typical ranges; masters and centres vary. Check programme details on official websites before you apply.</div></div>
 </footer>
 <script src="/js/data.js"></script>
 <script src="/js/render.js"></script>
 <script src="/js/scenes.js"></script>
 <script src="/js/config.js"></script>
+<script src="/js/i18n.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

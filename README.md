@@ -12,51 +12,44 @@ A mobile-friendly website (HTML, CSS and JavaScript only) that helps people in N
 | Learning plan builder (1 month to 3 years) with dated, numbered steps | `planner.html#plan` |
 | Dashboard: anonymous profile, saved trades, plan progress tick-boxes, backup code to move devices | `dashboard.html` |
 | National programmes, trade tests, help for all 36 states + FCT | `opportunities.html` |
-| "Ask a trainer" box (shows **Feature coming soon** until the AI is switched on) | `js/config.js`, `server/ask-openai.js` |
+| AI Trainer on every page, answering from our own trade data in 17 languages | `api/ask.js`, `js/config.js` |
 | Offline mode (installable web app) | `sw.js`, `manifest.webmanifest` |
 | SEO: page titles, descriptions, structured data, sitemap, robots.txt, share image | every page, `sitemap.xml`, `robots.txt` |
 
 Visitors never have to give a name, phone number or email. Profiles and plans are stored in their own browser.
 
-## Put it online (free)
+## What's new in v2
 
-Any static host works. The easiest:
+| Upgrade | What it does | Where |
+|---|---|---|
+| **AI Trainer (switched on)** | Answers from OUR trade facts first (years, skills, steps, first step, certificates, national programmes), in the visitor's language, and links the right trade pages | `api/ask.js`, `js/app.js` |
+| **17 Nigerian languages** | Built in: English, Hausa, Yoruba, Igbo, Pidgin. AI (beta): Fulfulde, Kanuri, Tiv, Ibibio, Efik, Izon, Edo, Nupe, Urhobo, Igala, Idoma, Ebira | `js/i18n.js`, `api/translate.js` |
+| **SEO** | Trade pages now match real searches ("How to learn welding in Nigeria"), 15 new category pages, canonical links, dated sitemap | `tools/build.js` |
+| **AEO** | Every trade and category page starts with a Quick answer and has 4-6 FAQs with FAQPage labels | `tools/build.js` |
+| **GEO** | `llms.txt` fact sheet for AI assistants; robots.txt welcomes AI search bots | `llms.txt`, `robots.txt` |
+| **Royal Workshop design** | The students' purple, refined: deep royal bands + hi-vis gold, readable lavender pages; calm motion | `css/style.css` (v2 section) |
 
-1. **Netlify Drop**: open https://app.netlify.com/drop and drag this whole folder onto the page. You get a public `https://…netlify.app` link in seconds.
-2. **GitHub Pages**: push the folder to a repository, then Settings → Pages → deploy from the main branch.
+## Hosting on Vercel
 
-Offline mode needs HTTPS, which both hosts give you automatically.
+The site is already on Vercel. To switch on the AI Trainer:
+1. Vercel → this project → **Settings → Environment Variables** → add `OPENAI_API_KEY`.
+2. **Redeploy**. The "Ask a trainer" button now answers (without the key it says it is not switched on yet).
 
-### After you have your web address (for Google)
+No build step runs on Vercel: the pages are already built and committed. If the address changes, put it in `tools/site.json`, run `node tools/build.js`, and push.
 
-1. Rebuild the pages with your address so canonical links and the sitemap are correct:
-   ```
-   SITE_URL=https://your-address.netlify.app node tools/build.js
-   ```
-   (Or open `sitemap.xml` and `robots.txt` and replace `https://www.example.com` with your address.)
-2. Upload again, then add the site in Google Search Console and submit `sitemap.xml`.
+**Never put the API key in `js/config.js` or any website file.** Website files are public.
 
 ## Edit the content
 
 All trades, categories and programmes live in **`js/data.js`**. After editing, run:
 
 ```
-node tools/build.js
+node tools/build.js     # regenerates every page, the sitemap, robots.txt, llms.txt and the offline cache list
+node tools/test.js      # 16 checks: AI Trainer safety, languages, SEO/AEO/GEO (no key needed)
 ```
 
-This regenerates every page, the sitemap and the offline cache list. Node.js 18 or newer is needed only for this step, not for the website itself.
-
-## Switch on the AI trainer later (OpenAI)
-
-The website already has the chat box and the code to call a server. To switch it on:
-
-1. Deploy `server/ask-openai.js` on any Node host (Render, Railway, a VPS…) with these environment variables:
-   - `OPENAI_API_KEY` — your key from the OpenAI dashboard
-   - `ALLOWED_ORIGIN` — your website address, e.g. `https://your-address.netlify.app`
-   - `OPENAI_MODEL` — optional; set it to a current model name from your OpenAI account
-2. In `js/config.js` set `enabled: true` and `endpoint` to your server address, e.g. `https://your-server.onrender.com/api/ask`.
-
-**Never put the API key in `js/config.js` or any website file.** Website files are public, and anyone could copy the key and spend your credit.
+## Native speakers: help us improve a language
+Open `js/i18n.js`, find the language block (e.g. `yo:` for Yoruba), fix the words and push. To make an AI language "built in", copy the English block, translate it, and change its `how` from `"ai"` to `"hand"`.
 
 ## Keep information current
 
