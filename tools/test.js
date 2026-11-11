@@ -72,6 +72,32 @@ global.fetch = async (url, opts) => {
     assert.strictEqual(r.data.strings['nav.home'], 'T:nav.home');
   });
 
+  await ok('translate: the agreement (doc mode) can be translated into Yoruba too', async () => {
+    const r = await call(translate, { body: { lang: 'yo', doc: true, strings: { intro: 'This agreement is made on {today}.' } } });
+    assert.strictEqual(r.code, 200);
+  });
+
+  console.log('Skill Passport signing (api/passport.js)');
+  const passport = require('../api/passport');
+  const pp = { trade: 'welding', name: 'Kunle', master: 'Mr Bayo', place: 'Ilaro', since: '2026-01', items: [{ i: 0, by: 'master', d: '2026-11-12' }, { i: 3, by: 'self', d: '2026-11-12' }] };
+  await ok('without PASSPORT_SECRET signing is switched off (503)', async () => assert.strictEqual((await call(passport, { body: { action: 'sign', passport: pp } })).code, 503));
+  process.env.PASSPORT_SECRET = 'test-secret-long-random';
+  let sig;
+  await ok('signs a passport', async () => { const r = await call(passport, { body: { action: 'sign', passport: pp } }); assert.strictEqual(r.code, 200); sig = r.data.sig; assert.ok(sig && sig.length === 22); });
+  await ok('an untouched passport verifies', async () => assert.strictEqual((await call(passport, { body: { action: 'verify', passport: pp, sig } })).data.valid, true));
+  await ok('adding a fake "master" skill breaks the signature', async () => {
+    const fake = JSON.parse(JSON.stringify(pp)); fake.items.push({ i: 5, by: 'master', d: '2026-11-12' });
+    assert.strictEqual((await call(passport, { body: { action: 'verify', passport: fake, sig } })).data.valid, false);
+  });
+  await ok('changing a self skill into "master" breaks the signature', async () => {
+    const fake = JSON.parse(JSON.stringify(pp)); fake.items[1].by = 'master';
+    assert.strictEqual((await call(passport, { body: { action: 'verify', passport: fake, sig } })).data.valid, false);
+  });
+  await ok('unknown trades and impossible skill numbers are rejected or dropped', () => {
+    assert.strictEqual(passport.canonical({ trade: 'flying', items: [] }), null);
+    assert.ok(!passport.canonical({ trade: 'welding', items: [{ i: 99, by: 'master', d: '2026-11-12' }] }).includes('"i":99'));
+  });
+
   console.log('Languages (js/i18n.js)');
   require('../js/i18n.js');
   const I = globalThis.I18N;
@@ -82,7 +108,7 @@ global.fetch = async (url, opts) => {
   });
   await ok('every data-i18n key used on the pages exists in English', () => {
     const used = new Set();
-    ['index.html', 'trade/welding.html', 'category/digital.html', 'js/app.js'].forEach((f) => {
+    ['index.html', 'trade/welding.html', 'category/digital.html', 'tools.html', 'agreement.html', 'js/app.js'].forEach((f) => {
       const h = fs.readFileSync(path.join(ROOT, f), 'utf8');
       [...h.matchAll(/data-i18n(?:-html|-placeholder|-label)?="([\w.]+)"/g)].forEach((m) => used.add(m[1]));
     });
@@ -90,7 +116,7 @@ global.fetch = async (url, opts) => {
   });
 
   console.log('SEO / AEO / GEO');
-  const pages = ['index.html', 'trades.html', 'careers.html', 'skills.html', 'planner.html', 'opportunities.html', 'category/index.html']
+  const pages = ['index.html', 'trades.html', 'careers.html', 'skills.html', 'planner.html', 'opportunities.html', 'category/index.html', 'tools.html', 'agreement.html', 'passport.html', 'card.html']
     .concat(Object.keys(D.CATEGORIES).map((c) => `category/${c}.html`), D.TRADES.map((t) => `trade/${t.id}.html`));
   await ok(`${pages.length} pages: title, description, canonical, one h1, valid JSON-LD`, () => {
     pages.forEach((f) => {
@@ -103,6 +129,11 @@ global.fetch = async (url, opts) => {
       assert.strictEqual((h.match(/<h1[\s>]/g) || []).length, 1, f + ' one h1');
       [...h.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].forEach((m) => JSON.parse(m[1]));
     });
+  });
+  await ok('the three tools have their pages, FAQ labels and the locked photo upload', () => {
+    ['agreement.html', 'passport.html', 'card.html'].forEach((f) => assert.ok(fs.readFileSync(path.join(ROOT, f), 'utf8').includes('"FAQPage"'), f));
+    const card = fs.readFileSync(path.join(ROOT, 'card.html'), 'utf8');
+    assert.ok(/id="cd-photos"[^>]*disabled/.test(card) && card.includes('Coming soon'));
   });
   await ok('every trade and category page has a Quick answer and FAQ labels (AEO)', () => {
     pages.filter((f) => /^(trade|category)\/(?!index)/.test(f)).forEach((f) => {
@@ -119,7 +150,7 @@ global.fetch = async (url, opts) => {
     assert.ok(fs.readFileSync(path.join(ROOT, 'llms.txt'), 'utf8').includes(`${D.TRADES.length} trades`));
   });
   await ok('no API key in any website file', () => {
-    ['js/app.js', 'js/config.js', 'js/i18n.js', 'index.html'].forEach((f) => assert.ok(!/sk-[A-Za-z0-9_-]{20,}/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')), f));
+    ['js/app.js', 'js/config.js', 'js/i18n.js', 'js/tools.js', 'index.html'].forEach((f) => assert.ok(!/sk-[A-Za-z0-9_-]{20,}/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')), f));
   });
 
   console.log(`\nAll ${passed} checks passed.`);

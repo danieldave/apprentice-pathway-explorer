@@ -29,10 +29,20 @@ Visitors never have to give a name, phone number or email. Profiles and plans ar
 | **GEO** | `llms.txt` fact sheet for AI assistants; robots.txt welcomes AI search bots | `llms.txt`, `robots.txt` |
 | **Royal Workshop design** | The students' purple, refined: deep royal bands + hi-vis gold, readable lavender pages; calm motion | `css/style.css` (v2 section) |
 
+## Apprentice Tools (new)
+
+| Tool | What it does | Where |
+|---|---|---|
+| **A. Apprenticeship Agreement Builder** | Fair written agreement (length, fee, hours, early exit, freedom terms, under-18 protections). A **fairness check** flags unfair or missing terms. Print/PDF, copy, and AI translation into any of the 16 other languages (only the template is sent, never names) | `agreement.html`, `js/tools.js` |
+| **B. Skill Passport** | Skills + stages from each trade's data. The apprentice ticks "I can do this"; the master confirms with a PIN. Share a **signed** link + QR: edits after signing are detected | `passport.html`, `api/passport.js` |
+| **C. Artisan Profile Card** | WhatsApp-status picture (1080×1350) + mini profile page with QR, WhatsApp/call buttons and Skill Passport badge. **Photo upload is built but locked (coming soon)** | `card.html` |
+
+Everything is saved on the user's phone and included in the dashboard backup code.
+
 ## Hosting on Vercel
 
 The site is already on Vercel. To switch on the AI Trainer:
-1. Vercel → this project → **Settings → Environment Variables** → add `OPENAI_API_KEY`.
+1. Vercel → this project → **Settings → Environment Variables** → add `OPENAI_API_KEY`, and `PASSPORT_SECRET` (any long random password, e.g. 40 random letters and numbers) for signed Skill Passports.
 2. **Redeploy**. The "Ask a trainer" button now answers (without the key it says it is not switched on yet).
 
 No build step runs on Vercel: the pages are already built and committed. If the address changes, put it in `tools/site.json`, run `node tools/build.js`, and push.
@@ -45,7 +55,7 @@ All trades, categories and programmes live in **`js/data.js`**. After editing, r
 
 ```
 node tools/build.js     # regenerates every page, the sitemap, robots.txt, llms.txt and the offline cache list
-node tools/test.js      # 16 checks: AI Trainer safety, languages, SEO/AEO/GEO (no key needed)
+node tools/test.js      # 24 checks: AI Trainer safety, languages, SEO/AEO/GEO (no key needed)
 ```
 
 ## Native speakers: help us improve a language

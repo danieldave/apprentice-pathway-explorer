@@ -22,7 +22,9 @@ module.exports = async function handler(req, res) {
   const body = await S.frontDoor(req, res, { limit: 30 });
   if (!body) return;
   const lang = String(body.lang || '');
-  if (!S.LANGUAGES[lang] || HAND_WRITTEN.includes(lang)) return res.status(400).json({ error: 'This language does not need AI translation.' });
+  // doc: true = a whole document (the apprenticeship agreement), which every language except English may need
+  const doc = body.doc === true;
+  if (!S.LANGUAGES[lang] || lang === 'en' || (!doc && HAND_WRITTEN.includes(lang))) return res.status(400).json({ error: 'This language does not need AI translation.' });
   const strings = body.strings && typeof body.strings === 'object' ? body.strings : null;
   if (!strings) return res.status(400).json({ error: 'Send the words to translate.' });
   const entries = Object.entries(strings).filter(([k, v]) => typeof v === 'string' && /^[\w.-]{1,60}$/.test(k)).slice(0, 250);
@@ -30,7 +32,7 @@ module.exports = async function handler(req, res) {
   if (!entries.length || total > MAX_CHARS) return res.status(400).json({ error: 'Too much text in one request.' });
 
   const input = Object.fromEntries(entries.map(([k, v]) => [k, v.slice(0, 600)]));
-  const key = S.keyFor('tr', lang + '|' + JSON.stringify(input));
+  const key = S.keyFor('tr', lang + (doc ? '|doc|' : '|') + JSON.stringify(input));
   const saved = S.cacheGet(key);
   if (saved) return res.status(200).json({ lang, strings: saved, cached: true });
 

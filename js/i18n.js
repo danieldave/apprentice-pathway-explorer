@@ -40,6 +40,11 @@
   ];
   const STRINGS = {
     en: {
+      "nav.tools": "Apprentice Tools", "tools.open": "Open",
+      "tools.agTitle": "Apprenticeship Agreement", "tools.agLead": "Write a fair agreement with your master before you start: length, fee, hours and freedom terms. Our fairness check warns you about unfair terms.",
+      "tools.ppTitle": "Skill Passport", "tools.ppLead": "Tick off every skill as you learn it. Your master confirms with a PIN. Share a signed link as proof for customers, SUPA screening or a trade test.",
+      "tools.cdTitle": "Artisan Profile Card", "tools.cdLead": "Make a WhatsApp-ready business card and a mini web page with your skills, area and a QR code.",
+      "tools.agTranslate": "Translate to my language",
       "nav.home": "Home", "nav.trades": "Trades", "nav.careers": "Careers", "nav.skills": "Talents / Skills",
       "nav.planner": "Pathway Planner", "nav.opps": "Opportunities", "nav.dash": "My Dashboard",
       "ui.language": "Language", "ui.translating": "Translating…",
@@ -63,6 +68,11 @@
       "foot.explore": "Explore", "foot.plan": "Plan", "foot.start": "Get started"
     },
     ha: {
+      "nav.tools": "Kayan Aikin Koyo", "tools.open": "Buɗe",
+      "tools.agTitle": "Yarjejeniyar Koyon Sana'a", "tools.agLead": "Rubuta yarjejeniya mai adalci da maigidanka kafin ka fara: tsawon lokaci, kuɗi, sa'o'i da sharuɗɗan 'yanci. Binciken adalci zai gargaɗe ka game da sharuɗɗa marasa adalci.",
+      "tools.ppTitle": "Fasfo na Basira", "tools.ppLead": "Yi alama a kowace basira idan ka koya ta. Maigidanka zai tabbatar da lambar sirri. Raba hanyar haɗi da aka sa hannu a matsayin shaida ga abokan ciniki, tantancewar SUPA ko gwajin sana'a.",
+      "tools.cdTitle": "Katin Bayanan Mai Sana'a", "tools.cdLead": "Yi katin kasuwanci na WhatsApp da ƙaramin shafin yanar gizo mai basirarka, yankinka da lambar QR.",
+      "tools.agTranslate": "Fassara zuwa harshena",
       "nav.home": "Gida", "nav.trades": "Sana'o'i", "nav.careers": "Ayyuka", "nav.skills": "Basira / Fasaha",
       "nav.planner": "Mai Tsara Hanya", "nav.opps": "Damammaki", "nav.dash": "Shafina",
       "ui.language": "Harshe", "ui.translating": "Ana fassarawa…",
@@ -85,6 +95,11 @@
       "foot.explore": "Bincika", "foot.plan": "Tsara", "foot.start": "Fara"
     },
     yo: {
+      "nav.tools": "Irinṣẹ́ Akẹ́kọ̀ọ́ṣẹ́", "tools.open": "Ṣí i",
+      "tools.agTitle": "Àdéhùn Ìkọ́ṣẹ́", "tools.agLead": "Kọ àdéhùn tí ó tọ́ pẹ̀lú ọ̀gá rẹ kí o tó bẹ̀rẹ̀: gígùn àkókò, owó, wákàtí àti òfin òmìnira. Àyẹ̀wò òdodo wa máa kìlọ̀ fún ọ nípa òfin tí kò tọ́.",
+      "tools.ppTitle": "Ìwé Ìrìnnà Ọgbọ́n", "tools.ppLead": "Sàmì sí gbogbo ọgbọ́n bí o ṣe ń kọ́ ọ. Ọ̀gá rẹ máa fìdí rẹ̀ múlẹ̀ pẹ̀lú PIN. Pín ìjápọ̀ tí a fọwọ́ sí gẹ́gẹ́ bí ẹ̀rí fún oníbàárà, àyẹ̀wò SUPA tàbí ìdánwò iṣẹ́ ọwọ́.",
+      "tools.cdTitle": "Káàdì Àlàyé Oníṣẹ́ọwọ́", "tools.cdLead": "Ṣe káàdì okòwò fún WhatsApp àti ojú-ìwé kékeré pẹ̀lú ọgbọ́n rẹ, àdúgbò rẹ àti kóòdù QR.",
+      "tools.agTranslate": "Túmọ̀ sí èdè mi",
       "nav.home": "Ilé", "nav.trades": "Iṣẹ́ ọwọ́", "nav.careers": "Iṣẹ́", "nav.skills": "Ẹ̀bùn / Ọgbọ́n",
       "nav.planner": "Olùṣètò Ọ̀nà", "nav.opps": "Àǹfààní", "nav.dash": "Ojú-ìwé mi",
       "ui.language": "Èdè", "ui.translating": "À ń túmọ̀…",
@@ -107,6 +122,11 @@
       "foot.explore": "Ṣàwárí", "foot.plan": "Ṣètò", "foot.start": "Bẹ̀rẹ̀"
     },
     ig: {
+      "nav.tools": "Ngwaọrụ Onye Ọmụmụ", "tools.open": "Mepee",
+      "tools.agTitle": "Nkwekọrịta Ịmụ Ọrụ", "tools.agLead": "Dee nkwekọrịta ziri ezi gị na oga gị tupu ị malite: ogologo oge, ego, awa na usoro nnwere onwe. Nyocha ikpe ziri ezi anyị ga-adọ gị aka na ntị maka usoro na-ezighi ezi.",
+      "tools.ppTitle": "Paspọtụ Nka", "tools.ppLead": "Kaa akara na nka ọ bụla ka ị na-amụta ya. Oga gị ga-akwado ya na PIN. Kesaa njikọ e bịanyere aka dịka ihe akaebe nye ndị ahịa, nyocha SUPA ma ọ bụ ule ọrụ aka.",
+      "tools.cdTitle": "Kaadị Profaịlụ Onye Ọrụ Aka", "tools.cdLead": "Mee kaadị azụmahịa maka WhatsApp na obere peeji weebụ nwere nka gị, mpaghara gị na koodu QR.",
+      "tools.agTranslate": "Sụgharịa n'asụsụ m",
       "nav.home": "Ụlọ", "nav.trades": "Ọrụ aka", "nav.careers": "Ọrụ", "nav.skills": "Onyinye / Nka",
       "nav.planner": "Onye Nhazi Ụzọ", "nav.opps": "Ohere", "nav.dash": "Peeji m",
       "ui.language": "Asụsụ", "ui.translating": "A na-asụgharị…",
@@ -129,6 +149,11 @@
       "foot.explore": "Nyochaa", "foot.plan": "Hazie", "foot.start": "Malite"
     },
     pcm: {
+      "nav.tools": "Apprentice Tools", "tools.open": "Open",
+      "tools.agTitle": "Apprenticeship Agreement", "tools.agLead": "Write better agreement with your oga before you start: how long, how much, hours and freedom terms. Our fairness check go warn you if any term no fair.",
+      "tools.ppTitle": "Skill Passport", "tools.ppLead": "Tick every skill as you learn am. Your oga go confirm with PIN. Share signed link as proof for customers, SUPA screening or trade test.",
+      "tools.cdTitle": "Artisan Profile Card", "tools.cdLead": "Make business card wey ready for WhatsApp and small web page with your skills, area and QR code.",
+      "tools.agTranslate": "Translate am to my language",
       "nav.home": "Home", "nav.trades": "Handwork", "nav.careers": "Work", "nav.skills": "Talent / Skills",
       "nav.planner": "Pathway Planner", "nav.opps": "Opportunities", "nav.dash": "My Dashboard",
       "ui.language": "Language", "ui.translating": "We dey translate…",
@@ -154,7 +179,7 @@
 
   /* ---------- the engine ---------- */
   const LANG_KEY = "ape-lang";
-  const VERSION = "2";                        // bump when English strings change, so AI translations refresh
+  const VERSION = "3";                        // bump when English strings change, so AI translations refresh
   let current = "en";
 
   const store = {

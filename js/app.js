@@ -30,7 +30,7 @@
       try { window.localStorage.removeItem('ape2:' + key); } catch (e) { /* blocked */ }
     }
   };
-  var KEYS = ['profile', 'saved', 'plans', 'quiz', 'recent'];
+  var KEYS = ['profile', 'saved', 'plans', 'quiz', 'recent', 'agreements', 'passports', 'pp-current', 'card'];
 
   /* ---------- toast ---------- */
   var toastTimer;

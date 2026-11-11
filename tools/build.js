@@ -33,7 +33,7 @@ const lc = (x) => String(x).split(' ').map((w) => /[A-Z]{2}/.test(w) ? w : w.toL
 
 const NAV = [
   ['index.html', 'Home', 'home', 'nav.home'], ['trades.html', 'Trades', 'trades', 'nav.trades'], ['careers.html', 'Careers', 'careers', 'nav.careers'], ['skills.html', 'Talents / Skills', 'skills', 'nav.skills'],
-  ['planner.html', 'Pathway Planner', 'planner', 'nav.planner'], ['opportunities.html', 'Opportunities', 'opportunities', 'nav.opps'], ['dashboard.html', 'My Dashboard', 'dashboard', 'nav.dash']
+  ['planner.html', 'Pathway Planner', 'planner', 'nav.planner'], ['opportunities.html', 'Opportunities', 'opportunities', 'nav.opps'], ['tools.html', 'Apprentice Tools', 'tools', 'nav.tools'], ['dashboard.html', 'My Dashboard', 'dashboard', 'nav.dash']
 ];
 
 function link(root, href) {
@@ -122,7 +122,9 @@ function footer(root) {
       <ul>
         <li><a href="${root}opportunities.html">Programmes &amp; trade tests</a></li>
         <li><a href="${root}opportunities.html#states">Help in your state</a></li>
-        <li><a href="${root}opportunities.html#agreement">Apprenticeship checklist</a></li>
+        <li><a href="${root}agreement.html">Apprenticeship agreement</a></li>
+        <li><a href="${root}passport.html">Skill Passport</a></li>
+        <li><a href="${root}card.html">Artisan profile card</a></li>
       </ul>
     </div>
   </div>
@@ -132,6 +134,7 @@ function footer(root) {
 }
 
 function scripts(root, page, extra) {
+  if (page === 'tools' || page === 'dashboard') extra = `<script src="${root}js/vendor/qrcode.js"></script>\n<script src="${root}js/tools.js"></script>\n` + (extra || '');
   const pre = PREVIEW && page === 'home' ? `<script>document.body.setAttribute('data-page','home');document.body.setAttribute('data-root','');</script>\n` : '';
   return `${pre}<script src="${root}js/data.js"></script>
 <script src="${root}js/render.js"></script>
@@ -376,6 +379,8 @@ for (const t of D.TRADES) {
         <div><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(tradeFAQ(t))}</div>
         <div class="row-actions">
           <a class="btn btn-primary" href="../planner.html#t-${t.id}"><span data-i18n="trade.buildPlan">Build my learning plan</span> ${icon('arrow')}</a>
+          <a class="btn btn-ghost" href="../agreement.html?trade=${t.id}">Make a fair agreement with a master</a>
+          <a class="btn btn-ghost" href="../passport.html?trade=${t.id}">Start my Skill Passport</a>
           <button type="button" class="btn btn-ghost" data-ask-trade="${t.id}">${icon('chat')} <span data-i18n="trade.ask">Ask the AI Trainer about this trade</span></button>
           <button type="button" class="btn btn-ghost" data-save="${t.id}">${icon('bookmark')} Save this trade</button>
           <button type="button" class="btn btn-ghost" id="share-link">${icon('copy')} Copy link</button>
@@ -545,6 +550,160 @@ written.push(page({
   </section>`
 }));
 
+/* ---------------- APPRENTICE TOOLS: agreement, passport, profile card ---------------- */
+const tradeOptions = D.TRADES.slice().sort((a, b) => a.title.localeCompare(b.title)).map((t) => `<option value="${t.id}">${esc(t.title)}</option>`).join('');
+const stateOptions = D.STATES.map((s) => `<option>${esc(s)}</option>`).join('');
+const toolHead = (crumb, h1, answer) => `
+  <section class="mat page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="${link('', 'index.html')}">Home</a><span>/</span><a href="tools.html" data-i18n="nav.tools">Apprentice Tools</a><span>/</span><span>${crumb}</span></p>
+      <h1>${h1}</h1>
+      <p class="answer-box"><b data-i18n="trade.quick">Quick answer</b>: ${answer}</p>
+    </div>
+  </section>`;
+
+const AG_FAQ = [
+  ['Do I need a written apprenticeship agreement in Nigeria?', 'Many apprenticeships are agreed by word of mouth, which causes problems about the length of training, fees and the freedom ceremony. A simple written agreement, signed by the master, the apprentice and a guardian or witness, protects everyone.'],
+  ['What should an apprenticeship agreement include?', 'Names of the master, apprentice and guardian; the trade; start date and length; days and hours; the fee and what happens if training ends early; feeding or transport support; the trade test plan; what the freedom ceremony costs and who pays; what the apprentice receives at freedom; and how disagreements will be settled.'],
+  ['How long should an apprenticeship last?', 'It depends on the trade. Each trade page shows the typical time, for example welding about 2 to 3 years. Our fairness check warns you if an agreement is much longer than usual.'],
+  ['Is this agreement a legal document?', 'It is a clear written record that people sign in front of witnesses. It is not legal advice. For large sums of money or disputes, talk to a lawyer, the trade association or a community leader.']
+];
+written.push(page({
+  file: 'tools.html', page: 'tools',
+  title: `Apprentice tools: agreement, skill passport & profile card | Apprentice Pathways`,
+  description: 'Free tools for Nigerian apprentices: a fair apprenticeship agreement, a Skill Passport confirmed by your master, and a WhatsApp profile card.',
+  main: toolHead('Overview', 'Apprentice Tools', 'three free tools that protect apprentices and help artisans find customers. Everything is saved on your own phone.') + `
+  <section class="section"><div class="wrap tool-grid">
+    <a class="tool-card" href="agreement.html"><span class="tool-num">A</span><h2 data-i18n="tools.agTitle">Apprenticeship Agreement</h2><p data-i18n="tools.agLead">Write a fair agreement with your master before you start: length, fee, hours and freedom terms. Our fairness check warns you about unfair terms.</p><span class="go"><span data-i18n="tools.open">Open</span> ${icon('arrow')}</span></a>
+    <a class="tool-card" href="passport.html"><span class="tool-num">B</span><h2 data-i18n="tools.ppTitle">Skill Passport</h2><p data-i18n="tools.ppLead">Tick off every skill as you learn it. Your master confirms with a PIN. Share a signed link as proof for customers, SUPA screening or a trade test.</p><span class="go"><span data-i18n="tools.open">Open</span> ${icon('arrow')}</span></a>
+    <a class="tool-card" href="card.html"><span class="tool-num">C</span><h2 data-i18n="tools.cdTitle">Artisan Profile Card</h2><p data-i18n="tools.cdLead">Make a WhatsApp-ready business card and a mini web page with your skills, area and a QR code.</p><span class="go"><span data-i18n="tools.open">Open</span> ${icon('arrow')}</span></a>
+  </div></section>`
+}));
+
+written.push(page({
+  file: 'agreement.html', page: 'tools',
+  title: `Apprenticeship agreement template for Nigeria (free, printable) | Apprentice Pathways`,
+  description: 'Write a fair apprenticeship agreement in Nigeria: length, fees, hours, trade test and freedom terms, with a fairness check. Free and printable.',
+  jsonld: [faqLD(AG_FAQ), { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Apprenticeship Agreement Builder', applicationCategory: 'EducationalApplication', operatingSystem: 'Any', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'NGN' }, inLanguage: 'en-NG' }],
+  main: toolHead('Agreement', 'Apprenticeship Agreement Builder', 'agree the length, fee, hours and freedom terms <strong>in writing</strong> before training starts, with a guardian or witness present. Fill the form, read the fairness check, then print and sign.') + `
+  <section class="section"><div class="wrap ag-layout">
+    <form class="panel ag-form" id="ag-form" novalidate>
+      <fieldset><legend>1. The people</legend><div class="form-grid">
+        <div class="field"><label for="ag-apprentice">Apprentice's name</label><input id="ag-apprentice" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label class="check"><input type="checkbox" id="ag-under18"> The apprentice is under 18</label></div>
+        <div class="field"><label for="ag-guardian">Parent, guardian or witness</label><input id="ag-guardian" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label for="ag-relation">Relationship to apprentice</label><input id="ag-relation" maxlength="30" placeholder="e.g. Mother, Uncle"></div>
+        <div class="field"><label for="ag-master">Master's name</label><input id="ag-master" maxlength="60" autocomplete="off"></div>
+        <div class="field"><label for="ag-business">Workshop or business name</label><input id="ag-business" maxlength="60"></div>
+        <div class="field"><label for="ag-address">Town or area</label><input id="ag-address" maxlength="80" placeholder="e.g. Ilaro"></div>
+        <div class="field"><label for="ag-state">State</label><select id="ag-state"><option value="">Choose</option>${stateOptions}</select></div>
+      </div></fieldset>
+      <fieldset><legend>2. The training</legend><div class="form-grid">
+        <div class="field full"><label for="ag-trade">Trade</label><select id="ag-trade"><option value="">Choose a trade</option>${tradeOptions}</select><span class="hint" id="ag-trade-hint"></span></div>
+        <div class="field"><label for="ag-start">Start date</label><input type="date" id="ag-start"></div>
+        <div class="field"><label for="ag-months">Length of training (months)</label><input type="number" id="ag-months" min="1" max="96" inputmode="numeric"></div>
+        <div class="field"><label for="ag-days">Training days per week</label><select id="ag-days"><option>5</option><option selected>6</option><option>7</option></select></div>
+        <div class="field"><label for="ag-hours">Hours per training day</label><input type="number" id="ag-hours" min="1" max="16" value="8" inputmode="numeric"></div>
+        <div class="field"><label for="ag-test">Certificate plan</label><select id="ag-test"><option value="trade">Trade test (Grade III) before freedom</option><option value="nabteb">NABTEB Modular Trade Certificate</option><option value="programme">Through a programme (SUPA, TVET, 3MTT…)</option><option value="none">No certificate planned</option></select></div>
+        <div class="field"><label for="ag-leave">Days of holiday per year</label><input type="number" id="ag-leave" min="0" max="60" value="14" inputmode="numeric"></div>
+      </div></fieldset>
+      <fieldset><legend>3. Money and support</legend><div class="form-grid">
+        <div class="field"><label for="ag-fee">Training fee (₦, 0 if none)</label><input type="number" id="ag-fee" min="0" step="500" value="0" inputmode="numeric"></div>
+        <div class="field"><label for="ag-pay">How the fee is paid</label><select id="ag-pay"><option value="once">Once, at the start</option><option value="parts">In parts during training</option><option value="none">No fee</option></select></div>
+        <div class="field full"><label for="ag-early">If training ends early</label><select id="ag-early"><option value="part">Unused part of the fee is refunded, and the master writes down what was learnt</option><option value="letter">No refund, but the master writes a letter of what was learnt</option><option value="none">Nothing agreed</option></select></div>
+        <div class="field full"><span class="label">Support the master gives</span><div class="checks">
+          <label class="check"><input type="checkbox" name="ag-support" value="feeding"> Feeding</label><label class="check"><input type="checkbox" name="ag-support" value="transport"> Transport</label>
+          <label class="check"><input type="checkbox" name="ag-support" value="accommodation"> Accommodation</label><label class="check"><input type="checkbox" name="ag-support" value="allowance"> Small allowance</label></div></div>
+      </div></fieldset>
+      <fieldset><legend>4. Freedom (settlement) and rules</legend><div class="form-grid">
+        <div class="field"><label for="ag-freedom">Who pays for the freedom ceremony?</label><select id="ag-freedom"><option value="none">No ceremony costs</option><option value="master">The master</option><option value="shared">Shared between both</option><option value="apprentice">The apprentice's family</option><option value="unclear">Not agreed yet</option></select></div>
+        <div class="field"><label for="ag-dispute">If there is a disagreement</label><select id="ag-dispute"><option value="family">Family meeting with the guardian</option><option value="association">The local trade association</option><option value="community">A community or religious leader</option></select></div>
+        <div class="field full"><span class="label">At freedom, the apprentice receives</span><div class="checks">
+          <label class="check"><input type="checkbox" name="ag-settle" value="letter" checked> A letter of completion</label><label class="check"><input type="checkbox" name="ag-settle" value="tools"> Starter tools</label>
+          <label class="check"><input type="checkbox" name="ag-settle" value="capital"> Capital or stock (Igba Boi style)</label><label class="check"><input type="checkbox" name="ag-settle" value="passport"> A confirmed Skill Passport</label></div></div>
+        <div class="field full"><label class="check"><input type="checkbox" id="ag-errands" checked> No house chores or personal errands unrelated to the trade during training hours</label></div>
+        <div class="field full"><label class="check"><input type="checkbox" id="ag-safety" checked> The master provides safety gear and never leaves the apprentice alone with dangerous machines</label></div>
+      </div></fieldset>
+      <div class="row-actions"><button type="button" class="btn btn-ghost" id="ag-save">${icon('bookmark')} Save draft</button><span class="note">Saved on this phone only.</span></div>
+    </form>
+    <div class="ag-side">
+      <div class="panel ag-check" id="ag-check" aria-live="polite"></div>
+      <div class="ag-actions">
+        <button type="button" class="btn btn-primary" id="ag-print">Print or save as PDF</button>
+        <button type="button" class="btn btn-ghost" id="ag-copy">${icon('copy')} Copy text</button>
+        <button type="button" class="btn btn-ghost" id="ag-translate"><span data-i18n="tools.agTranslate">Translate to my language</span></button>
+      </div>
+      <p class="note" id="ag-trmsg" aria-live="polite"></p>
+      <article class="ag-doc" id="ag-doc"></article>
+    </div>
+  </div></section>
+  <section class="section band"><div class="wrap" style="max-width:860px"><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(AG_FAQ)}
+    <p class="note" style="margin-top:16px">This builder writes a clear record for people to sign in front of witnesses. It is not legal advice. Names stay on your phone: when you translate, only the template text is sent, never the names.</p></div></section>`
+}));
+
+const PP_FAQ = [
+  ['What is a Skill Passport?', 'A digital logbook of the skills you have learnt in your trade. You tick a skill when you can do it alone, and your master confirms it with a PIN. You can share a signed link or QR code.'],
+  ['Is a Skill Passport a certificate?', 'No. It is a record of practice confirmed by your master. Official certificates come from the trade test (Grade III, II, I), NABTEB or national programmes. A passport helps you prepare and shows customers and screeners what you can do.'],
+  ['How do people know my passport is real?', 'When you share it, our server signs the link. If anyone changes it, the page shows "changed after signing". Only skills your master confirmed with the PIN show as confirmed.']
+];
+written.push(page({
+  file: 'passport.html', page: 'tools',
+  title: `Skill Passport: digital apprentice logbook confirmed by your master | Apprentice Pathways`,
+  description: 'Track every skill you learn as an apprentice. Your master confirms each one with a PIN; share a signed link or QR code with customers or examiners.',
+  jsonld: [faqLD(PP_FAQ)],
+  main: toolHead('Skill Passport', 'Skill Passport', 'a logbook of your trade skills. Tick a skill when you can do it alone; your master confirms it with a PIN. Share a signed link as proof of practice.') + `
+  <section class="section"><div class="wrap" id="pp-app"><p class="note">Loading your passport…</p></div></section>
+  <section class="section band"><div class="wrap" style="max-width:860px"><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(PP_FAQ)}</div></section>
+  <template id="pp-start-tpl">
+    <form class="panel pp-start" id="pp-start" novalidate>
+      <h2>Start a passport</h2>
+      <div class="form-grid">
+        <div class="field full"><label for="pp-trade">Your trade</label><select id="pp-trade"><option value="">Choose a trade</option>${tradeOptions}</select></div>
+        <div class="field"><label for="pp-name">Your name or nickname</label><input id="pp-name" maxlength="40"></div>
+        <div class="field"><label for="pp-master">Master or workshop</label><input id="pp-master" maxlength="60"></div>
+        <div class="field"><label for="pp-place">Town</label><input id="pp-place" maxlength="60"></div>
+        <div class="field"><label for="pp-since">Training since</label><input type="month" id="pp-since"></div>
+      </div>
+      <p class="err" id="pp-err" role="alert"></p>
+      <button type="submit" class="btn btn-dark">Create my passport</button>
+    </form>
+  </template>`
+}));
+
+const CD_FAQ = [
+  ['How do I advertise my skills as an artisan in Nigeria?', 'Make a clear card with your trade, skills, area and WhatsApp number; post it on your WhatsApp status and in community groups; ask happy customers to share it. A Skill Passport link builds extra trust.'],
+  ['Is my phone number safe?', 'Your card is made on your phone. Your number is only in the card image and link that you choose to share. Do not add a number you do not want customers to call.']
+];
+written.push(page({
+  file: 'card.html', page: 'tools',
+  title: `Free artisan business card & profile page maker (WhatsApp) | Apprentice Pathways`,
+  description: 'Make a free WhatsApp business card and mini profile page for your trade in Nigeria: skills, area, contact and a QR code, with your Skill Passport badge.',
+  jsonld: [faqLD(CD_FAQ)],
+  main: toolHead('Profile Card', 'Artisan Profile Card', 'make a picture card for your WhatsApp status and a mini web page with your skills, area and a QR code. Customers tap to chat with you.') + `
+  <section class="section"><div class="wrap cd-layout" id="cd-app">
+    <form class="panel cd-form" id="cd-form" novalidate>
+      <div class="form-grid">
+        <div class="field"><label for="cd-business">Business name</label><input id="cd-business" maxlength="40" placeholder="e.g. Tunde Welding Works"></div>
+        <div class="field"><label for="cd-name">Your name</label><input id="cd-name" maxlength="40"></div>
+        <div class="field full"><label for="cd-trade">Trade</label><select id="cd-trade"><option value="">Choose a trade</option>${tradeOptions}</select></div>
+        <div class="field full"><span class="label">Skills to show (pick up to 4)</span><div class="chips" id="cd-skills"></div></div>
+        <div class="field"><label for="cd-years">Years of experience</label><input type="number" id="cd-years" min="0" max="60" inputmode="numeric"></div>
+        <div class="field"><label for="cd-area">Area / town</label><input id="cd-area" maxlength="40" placeholder="e.g. Ilaro"></div>
+        <div class="field"><label for="cd-state">State</label><select id="cd-state"><option value="">Choose</option>${stateOptions}</select></div>
+        <div class="field"><label for="cd-phone">WhatsApp number <span class="note">(optional)</span></label><input id="cd-phone" type="tel" maxlength="16" placeholder="e.g. 0803 000 0000" inputmode="tel"></div>
+        <div class="field full"><label for="cd-tagline">Short promise to customers</label><input id="cd-tagline" maxlength="70" placeholder="e.g. Strong gates, fair prices, on time"></div>
+        <div class="field full"><label class="check"><input type="checkbox" id="cd-passport"> Show my Skill Passport badge</label></div>
+        <div class="field full"><label class="photo-lock" aria-disabled="true">${icon('award')} Add photos of your work <em class="soon">Coming soon</em><input type="file" id="cd-photos" accept="image/*" multiple disabled></label></div>
+      </div>
+      <div class="row-actions"><button type="button" class="btn btn-primary" id="cd-download">Download card for WhatsApp</button><button type="button" class="btn btn-ghost" id="cd-link">${icon('copy')} Copy my page link</button></div>
+      <p class="note" id="cd-msg" aria-live="polite"></p>
+    </form>
+    <div class="cd-preview-wrap"><div class="cd-preview" id="cd-preview" aria-live="polite"></div></div>
+  </div>
+  <div class="wrap" id="cd-public" hidden></div></section>
+  <section class="section band"><div class="wrap" style="max-width:860px"><h2 data-i18n="trade.faq">Questions people ask</h2>${faqHTML(CD_FAQ)}</div></section>`
+}));
+
 /* ---------------- DASHBOARD ---------------- */
 written.push(page({
   file: 'dashboard.html', page: 'dashboard',
@@ -597,6 +756,7 @@ written.push(page({
           <div class="stat"><strong id="st-steps">0/0</strong><span>Steps done</span></div>
         </div>
         <div class="panel" id="plans"><div class="section-head" style="margin-bottom:12px"><h2 style="margin:0">My learning plans</h2><a class="btn btn-ghost btn-sm" href="planner.html#plan">New plan</a></div><div id="dash-plans" style="display:grid;gap:12px"></div></div>
+        <div class="panel"><div class="section-head" style="margin-bottom:12px"><h2 style="margin:0">My apprentice tools</h2><a class="btn btn-ghost btn-sm" href="tools.html">Open tools</a></div><div id="dash-tools"></div></div>
         <div class="panel"><h2>Saved trades</h2><div id="dash-saved"></div></div>
         <div class="two-col">
           <div class="panel"><h2>Pathway Finder</h2><div id="dash-quiz"></div></div>
@@ -648,6 +808,9 @@ Key facts:
 ## Tools
 - [Pathway Finder quiz and learning plan](${base}/planner.html)
 - [Programmes, trade tests and help in every state](${base}/opportunities.html)
+- [Apprenticeship Agreement Builder](${base}/agreement.html): a fair written agreement between master and apprentice, with a fairness check
+- [Skill Passport](${base}/passport.html): a logbook of trade skills confirmed by the master with a PIN, shareable as a signed link
+- [Artisan Profile Card](${base}/card.html): a WhatsApp business card and mini profile page with a QR code
 
 ## Categories
 ${Object.keys(D.CATEGORIES).map((c) => `- [${D.CATEGORIES[c].label}](${base}/category/${c}.html)`).join('\n')}
@@ -661,7 +824,7 @@ fs.writeFileSync(path.join(OUT, 'manifest.webmanifest'), JSON.stringify({
   icons: [{ src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }, { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }, { src: 'icons/icon.svg', sizes: 'any', type: 'image/svg+xml' }]
 }, null, 2));
 
-const assets = ['css/style.css', 'js/data.js', 'js/render.js', 'js/scenes.js', 'js/config.js', 'js/i18n.js', 'js/app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
+const assets = ['css/style.css', 'js/data.js', 'js/render.js', 'js/scenes.js', 'js/config.js', 'js/i18n.js', 'js/app.js', 'js/tools.js', 'js/vendor/qrcode.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png'];
 // Core pages are saved for offline use straight away; each trade page is saved the first time it is opened.
 const precache = ['./'].concat(written.filter((f) => f !== '404.html' && !f.startsWith('trade/') && !f.startsWith('category/')), assets);
 const hash = crypto.createHash('sha1');

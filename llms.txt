@@ -11,6 +11,9 @@ Key facts:
 ## Tools
 - [Pathway Finder quiz and learning plan](https://apprentice-pathway-explorer.vercel.app/planner.html)
 - [Programmes, trade tests and help in every state](https://apprentice-pathway-explorer.vercel.app/opportunities.html)
+- [Apprenticeship Agreement Builder](https://apprentice-pathway-explorer.vercel.app/agreement.html): a fair written agreement between master and apprentice, with a fairness check
+- [Skill Passport](https://apprentice-pathway-explorer.vercel.app/passport.html): a logbook of trade skills confirmed by the master with a PIN, shareable as a signed link
+- [Artisan Profile Card](https://apprentice-pathway-explorer.vercel.app/card.html): a WhatsApp business card and mini profile page with a QR code
 
 ## Categories
 - [Building & Construction](https://apprentice-pathway-explorer.vercel.app/category/construction.html)

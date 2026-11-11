@@ -7,6 +7,7 @@
    The secret keys live in Vercel > Project > Settings > Environment Variables:
      OPENAI_API_KEY        required for the AI helper
      OPENAI_MODEL          optional (default gpt-4o-mini)
+     PASSPORT_SECRET       a long random password: signs Skill Passport share links
      ALLOWED_ORIGINS       optional: extra sites allowed to call the API, comma-separated
    A key is NEVER written in any file of this project.
    ===================================================================== */
@@ -115,4 +116,4 @@ const LANGUAGES = {
   ijc: 'Izon (Ijaw)', bin: 'Edo (Bini)', nup: 'Nupe', urh: 'Urhobo', igl: 'Igala', idu: 'Idoma', igb: 'Ebira'
 };
 
-module.exports = { hidePersonal, frontDoor, allowOrigin, askOpenAI, cacheGet, cacheSet, keyFor, LANGUAGES, MAX_TEXT, MODEL };
+module.exports = { hidePersonal, frontDoor, allowOrigin, allowed, visitor, askOpenAI, cacheGet, cacheSet, keyFor, LANGUAGES, MAX_TEXT, MODEL };

@@ -32,7 +32,7 @@
     </a>
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <ul class="nav-list"><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="trades.html" data-i18n="nav.trades">Trades</a></li><li><a href="careers.html" data-i18n="nav.careers">Careers</a></li><li><a href="skills.html" data-i18n="nav.skills">Talents / Skills</a></li><li><a href="planner.html" data-i18n="nav.planner">Pathway Planner</a></li><li><a href="opportunities.html" data-i18n="nav.opps">Opportunities</a></li><li><a href="dashboard.html" aria-current="page" data-i18n="nav.dash">My Dashboard</a></li></ul>
+      <ul class="nav-list"><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="trades.html" data-i18n="nav.trades">Trades</a></li><li><a href="careers.html" data-i18n="nav.careers">Careers</a></li><li><a href="skills.html" data-i18n="nav.skills">Talents / Skills</a></li><li><a href="planner.html" data-i18n="nav.planner">Pathway Planner</a></li><li><a href="opportunities.html" data-i18n="nav.opps">Opportunities</a></li><li><a href="tools.html" data-i18n="nav.tools">Apprentice Tools</a></li><li><a href="dashboard.html" aria-current="page" data-i18n="nav.dash">My Dashboard</a></li></ul>
     </nav>
     <label class="lang-pick" title="Language"><span class="visually-hidden" data-i18n="ui.language">Language</span>
       <select id="langSelect" aria-label="Language"><option value="en">English</option></select><small id="langStatus" aria-live="polite"></small></label>
@@ -86,6 +86,7 @@
           <div class="stat"><strong id="st-steps">0/0</strong><span>Steps done</span></div>
         </div>
         <div class="panel" id="plans"><div class="section-head" style="margin-bottom:12px"><h2 style="margin:0">My learning plans</h2><a class="btn btn-ghost btn-sm" href="planner.html#plan">New plan</a></div><div id="dash-plans" style="display:grid;gap:12px"></div></div>
+        <div class="panel"><div class="section-head" style="margin-bottom:12px"><h2 style="margin:0">My apprentice tools</h2><a class="btn btn-ghost btn-sm" href="tools.html">Open tools</a></div><div id="dash-tools"></div></div>
         <div class="panel"><h2>Saved trades</h2><div id="dash-saved"></div></div>
         <div class="two-col">
           <div class="panel"><h2>Pathway Finder</h2><div id="dash-quiz"></div></div>
@@ -123,7 +124,9 @@
       <ul>
         <li><a href="opportunities.html">Programmes &amp; trade tests</a></li>
         <li><a href="opportunities.html#states">Help in your state</a></li>
-        <li><a href="opportunities.html#agreement">Apprenticeship checklist</a></li>
+        <li><a href="agreement.html">Apprenticeship agreement</a></li>
+        <li><a href="passport.html">Skill Passport</a></li>
+        <li><a href="card.html">Artisan profile card</a></li>
       </ul>
     </div>
   </div>
@@ -135,5 +138,7 @@
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/vendor/qrcode.js"></script>
+<script src="js/tools.js"></script>
 </body>
 </html>

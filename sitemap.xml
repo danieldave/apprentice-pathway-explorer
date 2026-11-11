@@ -122,4 +122,8 @@
   <url><loc>https://apprentice-pathway-explorer.vercel.app/category/index.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://apprentice-pathway-explorer.vercel.app/planner.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
   <url><loc>https://apprentice-pathway-explorer.vercel.app/opportunities.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://apprentice-pathway-explorer.vercel.app/tools.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://apprentice-pathway-explorer.vercel.app/agreement.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://apprentice-pathway-explorer.vercel.app/passport.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
+  <url><loc>https://apprentice-pathway-explorer.vercel.app/card.html</loc><changefreq>monthly</changefreq><lastmod>2026-11-11</lastmod><priority>0.8</priority></url>
 </urlset>

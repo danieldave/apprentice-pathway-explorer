@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Skill Passport: digital apprentice logbook confirmed by your master | Apprentice Pathways</title>
+<meta name="description" content="Track every skill you learn as an apprentice. Your master confirms each one with a PIN; share a signed link or QR code with customers or examiners.">
+<link rel="canonical" href="https://apprentice-pathway-explorer.vercel.app/passport.html">
+<meta property="og:url" content="https://apprentice-pathway-explorer.vercel.app/passport.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apprentice Pathways Explorer">
+<meta property="og:title" content="Skill Passport: digital apprentice logbook confirmed by your master | Apprentice Pathways">
+<meta property="og:description" content="Track every skill you learn as an apprentice. Your master confirms each one with a PIN; share a signed link or QR code with customers or examiners.">
+<meta property="og:image" content="https://apprentice-pathway-explorer.vercel.app/icons/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#154536">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=JetBrains+Mono:wght@500&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a Skill Passport?","acceptedAnswer":{"@type":"Answer","text":"A digital logbook of the skills you have learnt in your trade. You tick a skill when you can do it alone, and your master confirms it with a PIN. You can share a signed link or QR code."}},{"@type":"Question","name":"Is a Skill Passport a certificate?","acceptedAnswer":{"@type":"Answer","text":"No. It is a record of practice confirmed by your master. Official certificates come from the trade test (Grade III, II, I), NABTEB or national programmes. A passport helps you prepare and shows customers and screeners what you can do."}},{"@type":"Question","name":"How do people know my passport is real?","acceptedAnswer":{"@type":"Answer","text":"When you share it, our server signs the link. If anyone changes it, the page shows \"changed after signing\". Only skills your master confirmed with the PIN show as confirmed."}}]}]</script>
+</head>
+<body data-page="tools" data-root="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="Apprentice Pathways Explorer home">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12l-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17.6 15L22 10.6 13.4 2 9 6.4z"/></svg></span>
+      <span>Apprentice Pathways<small>Explorer · Nigeria</small></span>
+    </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list"><li><a href="index.html" data-i18n="nav.home">Home</a></li><li><a href="trades.html" data-i18n="nav.trades">Trades</a></li><li><a href="careers.html" data-i18n="nav.careers">Careers</a></li><li><a href="skills.html" data-i18n="nav.skills">Talents / Skills</a></li><li><a href="planner.html" data-i18n="nav.planner">Pathway Planner</a></li><li><a href="opportunities.html" data-i18n="nav.opps">Opportunities</a></li><li><a href="tools.html" aria-current="page" data-i18n="nav.tools">Apprentice Tools</a></li><li><a href="dashboard.html" data-i18n="nav.dash">My Dashboard</a></li></ul>
+    </nav>
+    <label class="lang-pick" title="Language"><span class="visually-hidden" data-i18n="ui.language">Language</span>
+      <select id="langSelect" aria-label="Language"><option value="en">English</option></select><small id="langStatus" aria-live="polite"></small></label>
+  </div>
+</header>
+<p class="ai-beta" id="aiBeta" hidden role="note"></p>
+<main id="main">
+
+  <section class="mat page-head">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a><span>/</span><a href="tools.html" data-i18n="nav.tools">Apprentice Tools</a><span>/</span><span>Skill Passport</span></p>
+      <h1>Skill Passport</h1>
+      <p class="answer-box"><b data-i18n="trade.quick">Quick answer</b>: a logbook of your trade skills. Tick a skill when you can do it alone; your master confirms it with a PIN. Share a signed link as proof of practice.</p>
+    </div>
+  </section>
+  <section class="section"><div class="wrap" id="pp-app"><p class="note">Loading your passport…</p></div></section>
+  <section class="section band"><div class="wrap" style="max-width:860px"><h2 data-i18n="trade.faq">Questions people ask</h2><div class="faq"><details class="faq-item"><summary><h3>What is a Skill Passport?</h3></summary><p>A digital logbook of the skills you have learnt in your trade. You tick a skill when you can do it alone, and your master confirms it with a PIN. You can share a signed link or QR code.</p></details><details class="faq-item"><summary><h3>Is a Skill Passport a certificate?</h3></summary><p>No. It is a record of practice confirmed by your master. Official certificates come from the trade test (Grade III, II, I), NABTEB or national programmes. A passport helps you prepare and shows customers and screeners what you can do.</p></details><details class="faq-item"><summary><h3>How do people know my passport is real?</h3></summary><p>When you share it, our server signs the link. If anyone changes it, the page shows &quot;changed after signing&quot;. Only skills your master confirmed with the PIN show as confirmed.</p></details></div></div></section>
+  <template id="pp-start-tpl">
+    <form class="panel pp-start" id="pp-start" novalidate>
+      <h2>Start a passport</h2>
+      <div class="form-grid">
+        <div class="field full"><label for="pp-trade">Your trade</label><select id="pp-trade"><option value="">Choose a trade</option><option value="adire">Adire &amp; Tie-Dye</option><option value="aluminium">Aluminium &amp; Glass Fabrication</option><option value="animation">Animation &amp; Motion Graphics</option><option value="aso-oke">Aso-Oke Weaving</option><option value="auto-electrician">Auto Electrician</option><option value="auto-mechanic">Auto Mechanic</option><option value="bag-making">Bag Making</option><option value="baking">Baking &amp; Confectionery</option><option value="barbing">Barbing</option><option value="beads">Bead Making &amp; Bead Jewellery</option><option value="beekeeping">Beekeeping</option><option value="blacksmith">Blacksmithing</option><option value="bookkeeping">Bookkeeping &amp; Small Business Accounts</option><option value="borehole">Borehole Drilling &amp; Water Systems</option><option value="bricklaying">Bricklaying &amp; Block Laying</option><option value="bronze-casting">Bronze &amp; Brass Casting</option><option value="butchery">Butchery &amp; Meat Processing</option><option value="cake-design">Cake Making &amp; Decoration</option><option value="calabash">Calabash Carving &amp; Decoration</option><option value="cane-weaving">Cane &amp; Rattan Weaving</option><option value="cassava">Cassava &amp; Grain Processing</option><option value="catering">Catering &amp; Event Cooking</option><option value="cctv">CCTV &amp; Security Systems</option><option value="computer-repair">Computer Hardware Repair</option><option value="content-creation">Content Creation</option><option value="cybersecurity">Cybersecurity</option><option value="data-analysis">Data Analysis</option><option value="digital-marketing">Digital Marketing</option><option value="dj">DJing &amp; Event Sound</option><option value="draughtsmanship">Draughtsmanship &amp; CAD</option><option value="rewinding">Electric Motor Rewinding</option><option value="electrical">Electrical Installation (House Wiring)</option><option value="embroidery">Embroidery &amp; Monogramming</option><option value="event-decor">Event Decoration &amp; Planning</option><option value="fashion-design">Fashion Design &amp; Dressmaking</option><option value="fine-art">Fine Art &amp; Portrait Painting</option><option value="fish-farming">Fish Farming (Aquaculture)</option><option value="furniture">Furniture Making &amp; Cabinetry</option><option value="gele">Gele &amp; Head-tie Styling</option><option value="generator">Generator Repair</option><option value="livestock">Goat, Sheep &amp; Pig Rearing</option><option value="jewellery">Goldsmithing &amp; Jewellery</option><option value="graphic-design">Graphic Design</option><option value="hairdressing">Hairdressing &amp; Braiding</option><option value="heavy-equipment">Heavy Equipment Operation</option><option value="truck-mechanic">Heavy-Duty Truck Mechanic</option><option value="appliance-repair">Home Appliance Repair</option><option value="hospitality">Hotel &amp; Hospitality Services</option><option value="interior-decor">Interior Decoration</option><option value="paving">Interlocking Paving &amp; Kerbs</option><option value="iron-bending">Iron Bending (Steel Fixing)</option><option value="it-support">IT Support &amp; Networking</option><option value="lab-quality">Laboratory &amp; Food Quality Control</option><option value="survey-assistant">Land Survey Assistant</option><option value="laundry">Laundry &amp; Dry Cleaning</option><option value="logistics">Logistics &amp; Dispatch Operations</option><option value="machining">Machining (Lathe &amp; Milling)</option><option value="makeup">Makeup Artistry</option><option value="motorcycle">Motorcycle &amp; Keke Repair</option><option value="music-production">Music Production &amp; Sound Engineering</option><option value="nails">Nail Technology</option><option value="painting">Painting &amp; Decoration</option><option value="palm-oil">Palm Oil Processing</option><option value="panel-beating">Panel Beating &amp; Spray Painting</option><option value="phone-repair">Phone Repair</option><option value="photography">Photography</option><option value="plumbing">Plumbing &amp; Pipe Fitting</option><option value="pop">POP Ceiling &amp; Screeding</option><option value="pos-agent">POS &amp; Mobile Money Agent</option><option value="pottery">Pottery &amp; Ceramics</option><option value="poultry">Poultry Farming</option><option value="printing">Printing &amp; Branding</option><option value="process-operator">Process Plant Operator (Oil &amp; Gas)</option><option value="driving">Professional Driving</option><option value="rac">Refrigeration &amp; Air-Conditioning (RAC)</option><option value="roofing">Roofing &amp; Site Carpentry</option><option value="satellite">Satellite Dish &amp; TV Installation</option><option value="shoemaking">Shoemaking &amp; Leatherwork</option><option value="small-chops">Small Chops &amp; Pastry</option><option value="snail-farming">Snail Farming</option><option value="cosmetics">Soap, Cream &amp; Cosmetics Production</option><option value="software-dev">Software Development</option><option value="solar">Solar PV &amp; Inverter Installation</option><option value="spa">Spa &amp; Massage Therapy</option><option value="tailoring">Tailoring (Native &amp; Suits)</option><option value="telecom">Telecom Mast Technician</option><option value="tiling">Tiling &amp; Floor Finishing</option><option value="tractor">Tractor Operation &amp; Farm Mechanisation</option><option value="electronics-repair">TV &amp; Electronics Repair</option><option value="ui-ux">UI/UX Design</option><option value="upholstery">Upholstery</option><option value="vegetables">Vegetable &amp; Greenhouse Farming</option><option value="videography">Videography &amp; Video Editing</option><option value="vulcanizing">Vulcanizing &amp; Wheel Balancing</option><option value="web-design">Web Design &amp; WordPress</option><option value="welding">Welding &amp; Fabrication</option><option value="wig-making">Wig Making &amp; Revamping</option><option value="wood-carving">Wood Carving &amp; Sculpture</option><option value="drinks">Zobo, Juice &amp; Yoghurt Production</option></select></div>
+        <div class="field"><label for="pp-name">Your name or nickname</label><input id="pp-name" maxlength="40"></div>
+        <div class="field"><label for="pp-master">Master or workshop</label><input id="pp-master" maxlength="60"></div>
+        <div class="field"><label for="pp-place">Town</label><input id="pp-place" maxlength="60"></div>
+        <div class="field"><label for="pp-since">Training since</label><input type="month" id="pp-since"></div>
+      </div>
+      <p class="err" id="pp-err" role="alert"></p>
+      <button type="submit" class="btn btn-dark">Create my passport</button>
+    </form>
+  </template>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="index.html"><span>Apprentice Pathways<small>Explorer · Nigeria</small></span></a>
+      <p>Free guides to 99 trades, careers and skills in Nigeria, with personal learning plans. Your profile and plans stay on your own device.</p>
+    </div>
+    <div>
+      <h2 data-i18n="foot.explore">Explore</h2>
+      <ul>
+        <li><a href="trades.html">Trades (50)</a></li>
+        <li><a href="careers.html">Careers (16)</a></li>
+        <li><a href="skills.html">Talents / Skills (33)</a></li>
+        <li><a href="category/">All 15 categories</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 data-i18n="foot.plan">Plan</h2>
+      <ul>
+        <li><a href="planner.html">Pathway Finder</a></li>
+        <li><a href="planner.html#plan">Learning plan builder</a></li>
+        <li><a href="dashboard.html">My Dashboard</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 data-i18n="foot.start">Get started</h2>
+      <ul>
+        <li><a href="opportunities.html">Programmes &amp; trade tests</a></li>
+        <li><a href="opportunities.html#states">Help in your state</a></li>
+        <li><a href="agreement.html">Apprenticeship agreement</a></li>
+        <li><a href="passport.html">Skill Passport</a></li>
+        <li><a href="card.html">Artisan profile card</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base"><div class="wrap">© <span id="year">2026</span> Apprentice Pathways Explorer. Training times are typical ranges; masters and centres vary. Check programme details on official websites before you apply.</div></div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+<script src="js/vendor/qrcode.js"></script>
+<script src="js/tools.js"></script>
+</body>
+</html>
