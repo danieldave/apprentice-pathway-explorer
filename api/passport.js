@@ -57,7 +57,8 @@ module.exports = async function handler(req, res) {
   if (body.action === 'verify') {
     const given = String(body.sig || '');
     const expected = sign(text);
-    const valid = given.length === expected.length && crypto.timingSafeEqual(Buffer.from(given), Buffer.from(expected));
+    const a = Buffer.from(given), b = Buffer.from(expected);
+    const valid = a.length === b.length && crypto.timingSafeEqual(a, b);
     return res.status(200).json({ valid });
   }
   return res.status(400).json({ error: 'Unknown action.' });

@@ -14,6 +14,7 @@
    ===================================================================== */
 'use strict';
 const S = require('./_lib/shared');
+const OURS = require('../js/i18n.js').STRINGS.en;   // page words: only OUR OWN may be translated (not a free translator for strangers)
 
 const HAND_WRITTEN = ['en', 'ha', 'yo', 'ig', 'pcm'];
 const MAX_CHARS = 9000;
@@ -25,9 +26,10 @@ module.exports = async function handler(req, res) {
   // doc: true = a whole document (the apprenticeship agreement), which every language except English may need
   const doc = body.doc === true;
   if (!S.LANGUAGES[lang] || lang === 'en' || (!doc && HAND_WRITTEN.includes(lang))) return res.status(400).json({ error: 'This language does not need AI translation.' });
+  if (doc && !S.allowed(S.visitor(req) + ':doc', 8)) return res.status(429).json({ error: 'You have translated many agreements this hour. Please try again later.' });
   const strings = body.strings && typeof body.strings === 'object' ? body.strings : null;
   if (!strings) return res.status(400).json({ error: 'Send the words to translate.' });
-  const entries = Object.entries(strings).filter(([k, v]) => typeof v === 'string' && /^[\w.-]{1,60}$/.test(k)).slice(0, 250);
+  const entries = Object.entries(strings).filter(([k, v]) => typeof v === 'string' && /^[\w.-]{1,60}$/.test(k) && (doc || OURS[k] === v)).slice(0, 250);
   const total = entries.reduce((n, [, v]) => n + v.length, 0);
   if (!entries.length || total > MAX_CHARS) return res.status(400).json({ error: 'Too much text in one request.' });
 
