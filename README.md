@@ -64,3 +64,6 @@ Open `js/i18n.js`, find the language block (e.g. `yo:` for Yoruba), fix the word
 ## Keep information current
 
 Programme details (SUPA, TVET, 3MTT, NDE, trade tests) change often. They were checked in October 2026. Review `OPPORTUNITIES` in `js/data.js` every few months.
+
+## Ask a Master (`/ask-a-master.html`)
+A printable card with the 10 questions to ask a master before joining a workshop, each with what a good answer sounds like. Tick boxes are remembered on the phone. Linked from the Apprentice Tools page as tool D.
